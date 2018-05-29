@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/bg_gray"
+              android:orientation="vertical"
+              android:id="@+id/sample_container">
+    <TextView
+        android:id="@+id/base_info"
+        android:visibility="visible"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_gravity="center"
+        android:text="Ejemplo Dnie Activity"
+        android:textColor="@color/TextColor"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/result_info"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:text="Resultado"
+        android:textColor="@color/TextColor"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/can_button"
+        android:visibility="gone"
+        android:background="@drawable/button_shape"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/PureWhite"
+        android:text="Establecer can"
+        android:layout_gravity="center"
+        android:textSize="18sp"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/fragment_container"
+        android:orientation="vertical">
+    </LinearLayout >
+
+</LinearLayout>
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="PureWhite">#FFFF</color>
+    <color name="list_light_grey">#F0F0F0</color>
+    <color name="bg_gray">#dcdcdc</color>
+    <color name="black">#000000</color>
+    <color name="TextColor">#222222</color>
+</resources>
