@@ -1,4 +1,4 @@
-package com.leps.android.eidasbrowser;
+package com.fnmt.sample_dnie_app;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -11,7 +11,7 @@ import android.os.Build;
 import android.security.KeyChain;
 import android.security.KeyChainAliasCallback;
 import android.security.KeyChainException;
-import android.support.annotation.RequiresApi;
+//import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.webkit.ClientCertRequest;
 import android.webkit.SslErrorHandler;
@@ -26,7 +26,7 @@ import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 
 /**
- * Created by elenat on 2/2/18.
+ * Created by emtg on 23/7/18.
  */
 
 public class MyWebViewClient extends WebViewClient {
@@ -72,7 +72,6 @@ public class MyWebViewClient extends WebViewClient {
         return false;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request){
         //Log.d(TAG, "shouldInterceptRequest " + request.getUrl());
         //Log.d(TAG, "shouldInterceptRequest tostring: " + request.toString());
@@ -84,7 +83,6 @@ public class MyWebViewClient extends WebViewClient {
         return null;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onReceivedClientCertRequest(WebView view, ClientCertRequest request) {
 
@@ -103,7 +101,6 @@ public class MyWebViewClient extends WebViewClient {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void createCertSourceSelectorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(fatherActivity);
         builder.setMessage(R.string.dialog_cert_selector_message)
@@ -115,7 +112,6 @@ public class MyWebViewClient extends WebViewClient {
             }
         });
         builder.setNegativeButton(R.string.dialog_cert_selector_dnie, new DialogInterface.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             public void onClick(DialogInterface dialog, int id) {
                 onDNIeSelection();
             }
@@ -131,13 +127,11 @@ public class MyWebViewClient extends WebViewClient {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void showAndroidCertSelector() {
 
         KeyChain.choosePrivateKeyAlias(fatherActivity,
                 new KeyChainAliasCallback() {
 
-                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     public void alias(String alias) {
                         // Credential alias selected.  Remember the alias selection for future use.
                         if (alias != null) {
@@ -154,15 +148,11 @@ public class MyWebViewClient extends WebViewClient {
                 443,                   // port of server requesting the cert, -1 if unavailable
                 savedAlias);                // alias to preselect, null if unavailable
 
-        /*Intent installIntent = KeyChain.createInstallIntent();
-        installIntent.putExtra(KeyChain.EXTRA_PKCS12, keystore);
-        startActivityForResult(installIntent, INSTALL_KEYSTORE_CODE);*/
 
     }
 
 
     /* Method for exec the callback of KeyChain.choosePrivateKeyAlias (onReceivedClientCertRequest) */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void saveAlias(String alias) {
         if (alias != null) {
             this.savedAlias = alias;
@@ -174,47 +164,8 @@ public class MyWebViewClient extends WebViewClient {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onChosenCertForClientCertRequest(String alias)  {
 
-        /*
-        File extStore = Environment.getExternalStorageDirectory();
-
-        String certPath = extStore.getAbsolutePath() + File.separator + "Android/spain_test_credential.pfx";
-        Log.d(TAG, "Fixed path to cert: " + certPath);
-
-        AssetManager assetManager = fatherActivity.getAssets();
-        AssetFileDescriptor fileDescriptor = null;
-        FileInputStream stream = null;
-        try {
-            fileDescriptor = assetManager.openFd("spain_test_credential.pfx");
-            //fileDescriptor = assetManager.open(@idR.raw.spain_test_credential);
-            if (fileDescriptor == null)
-                Log.d(TAG, "error opening fileDescriptor of PFX credential");
-            else
-                Log.d(TAG, "Fixed path to cert: " + fileDescriptor.toString());
-            stream = fileDescriptor.createInputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String passphrase = "test";
-        //Log.d(TAG, "Fixed path to cert: " + certPath);
-        //KeyStore ks = getCertsFromP12(certPath, passphrase);
-        KeyStore ks = null;
-        try {
-            ks = KeyStore.getInstance("pkcs12");
-            ks.load(stream, passphrase.toCharArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        }
-        */
 
         //Log.d(TAG, "onChosenCertForClientCertRequest");
         PrivateKey privateKey = null;
@@ -241,125 +192,48 @@ public class MyWebViewClient extends WebViewClient {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        /*KeyStore.PrivateKeyEntry pkEntry = null;
-        try {
-            KeyStore.ProtectionParameter protParam = new KeyStore.PasswordProtection(passphrase.toCharArray());
-            pkEntry = (KeyStore.PrivateKeyEntry) ks.getEntry(alias, protParam);
-            PrivateKey myPrivateKey = pkEntry.getPrivateKey();
-            List<X509Certificate> certList = new ArrayList<X509Certificate>();
-
-            Enumeration e = ks.aliases();
-            while (e.hasMoreElements()) {
-                String alias = (String) e.nextElement();
-                Log.d(TAG, "onReceivedClientCertRequest - alias: "+ alias);
-                certList.add((X509Certificate) ks.getCertificate(alias));
-            }
-
-            request.proceed(myPrivateKey, (X509Certificate[]) certList.toArray());
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnrecoverableEntryException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        }
-        */
-
-
-        /*KeyChain.choosePrivateKeyAlias(WebViewActivity.this, new KeyChainAliasCallback() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void alias(String alias) {
-                Log.e(getClass().getSimpleName(), "===>Key alias is: " + alias);
-                try {
-                    PrivateKey changPrivateKey = KeyChain.getPrivateKey(WebViewActivity.this, alias);
-                    X509Certificate[] certificates = KeyChain.getCertificateChain(WebViewActivity.this, alias);
-                    Log.v(getClass().getSimpleName(), "===>Getting Private Key Success!");
-                    request.proceed(changPrivateKey, certificates);
-                } catch (KeyChainException e) {
-                    Log.e(getClass().getSimpleName(), Util.printException(e));
-                } catch (InterruptedException e) {
-                    Log.e(getClass().getSimpleName(), Util.printException(e));
-                }
-            }
-        }, new String[]{"RSA"}, null, null, -1, null);
-        //}, request.getKeyTypes(), request.getPrincipals(), request.getHost(), request.getPort(), null);
-
-        super.onReceivedClientCertRequest(view,request);
-        */
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onDNIeSelection () {
 
         Log.d(TAG,"onDNIeSelection started");
 
-        ((eIDASBrowserApp)fatherActivity.getApplicationContext()).setStarted(true);
-
+        /*((eIDASBrowserApp)fatherActivity.getApplicationContext()).setStarted(true);
         Intent intent = new Intent(fatherActivity, DNIeCanSelection.class);
-
         fatherActivity.startActivityForResult(intent, DisplayURLActivity.REQ_DNIE_READ);
+        */
 
-        // Se instancia el proveedor y se añade
+        PrivateKey privateKey = ((SampleActivity_2)fatherActivity).get_privateKey();
+        X509Certificate[] certifcateChain = ((SampleActivity_2)fatherActivity).get_certificateChain();
+
+        if (privateKey != null) {
+            request.proceed(privateKey, certifcateChain);
+        }
+        else {
+            Log.d(TAG, "onChosenCertForClientCertRequest - error retriving private key");
+        }
+
         /*
-        final DnieProvider p = new DnieProvider();
-        Tag tagFromIntent = null; //TODO implementar
-        p.setProviderTag(tagFromIntent); // Tag discovered by the activity
-        p.setProviderCan(String.valueOf(canNumber)); // DNIe’s Can number
-        Security.insertProviderAt(p, 1);
-
-        // Creamos el cuadro de diálogo que gestionará la solicitud del PIN
-        //MyPasswordDialog myFragment = new MyPasswordDialog(NFCOperationsEnc.this, true);
-        NFCOperationsEnc nfcOperationsEnc = new NFCOperationsEnc();
-        MyPasswordDialog myFragment = new MyPasswordDialog(nfcOperationsEnc, true);
-        DNIeDialogManager.setDialogUIHandler(myFragment);*/
-
-        // Cargamos certificados y keyReferences
-        /*final KeyStore ksUserDNIe;
+        PrivateKey privateKey = null;
         try {
-            ksUserDNIe = KeyStore.getInstance("MRTD");
-            ksUserDNIe.load(null, null);
-            Certificate signCert = ksUserDNIe.getCertificate("CertFirmaDigital");
-            Certificate authCert = ksUserDNIe.getCertificate("CertAutenticacion");
+            privateKey = KeyChain.getPrivateKey(appContext, savedAlias);
 
-            // El siguiente certificado es completo/real ya que nos pedirá el PIN
-            KeyStore.Entry entry = ksUserDNIe.getEntry("CertAutenticacion", null);
-            KeyStore.PrivateKeyEntry pkEntry = (KeyStore.PrivateKeyEntry) entry;
-            Certificate authCertCompleto = pkEntry.getCertificate();
-            Log.d(TAG, "onDNIeSelection - authCertCompleto");
-
-            PrivateKey privateKey = pkEntry.getPrivateKey();
-            Log.d(TAG, "onDNIeSelection - private key");
-
-            CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            ByteArrayInputStream bais = new ByteArrayInputStream(authCertCompleto.getEncoded());
-            X509Certificate x509 =  (X509Certificate) cf.generateCertificate(bais);
-            X509Certificate[] certifcateChain = new X509Certificate[]{x509};
-            Log.d(TAG, "onDNIeSelection - public certs");
+            X509Certificate[] certifcateChain = KeyChain.getCertificateChain(appContext, savedAlias);
+            Log.d(TAG, "onChosenCertForClientCertRequest - public certs");
 
             if (privateKey != null) {
                 request.proceed(privateKey, certifcateChain);
             }
             else {
-                Log.d(TAG, "onDNIeSelection - error retriving private key");
+                Log.d(TAG, "onChosenCertForClientCertRequest - error retriving private key");
             }
+        } catch (KeyChainException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
 
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnrecoverableEntryException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-*/
+
     }
 
     public void onReceivedError(WebView view, int errorCode,
@@ -419,12 +293,7 @@ public class MyWebViewClient extends WebViewClient {
             p12 = KeyStore.getInstance("pkcs12");
             p12.load(new FileInputStream(pathToFile), passphrase.toCharArray());
 
-            /*Enumeration e = p12.aliases();
-            while (e.hasMoreElements()) {
-                String alias = (String) e.nextElement();
-                X509Certificate c = (X509Certificate) p12.getCertificate(alias);
-                addCertificateToKeyStore(c);
-            }*/
+
         } catch (Exception e) {
             Log.d(TAG, "getCertsFromP12 error" + e);
         }

@@ -8,8 +8,11 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,11 +53,12 @@ import static android.view.View.VISIBLE;
 
 public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.NFCCommReaderFragmentListener, NetworkCommunicationFragment.NetCommFragmentListener, SignatureNotification{
 
-    private static final String AUTH_CERT_ALIAS = "CertAutenticacion";
-    private static final String URL_TUSEGURIDADSOCIAL = "https://tuc.seg-social.gob.es";
+    private static final String TAG = SampleActivity_2.class.getSimpleName();
 
-    private static final String HTML_SAMPLE =  "<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{background-color: #EEEEEE;}.GrupoHome{color: black;font-size: 15px;}"+
-                                               "h5{font-family: arial;color: black;font-size: 20px;}p{font-family: verdana;font-size: 15px;color: #333333;}</style></head><body>##COTIZADO####JUBILACION##</body></html>";
+    private static final String AUTH_CERT_ALIAS = "CertAutenticacion";
+    //private static final String URL_TUSEGURIDADSOCIAL = "https://tuc.seg-social.gob.es";
+
+    //private static final String HTML_SAMPLE =  "<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{background-color: #EEEEEE;}.GrupoHome{color: black;font-size: 15px;}"+"h5{font-family: arial;color: black;font-size: 20px;}p{font-family: verdana;font-size: 15px;color: #333333;}</style></head><body>##COTIZADO####JUBILACION##</body></html>";
 
     CANSpecDO can = null;
 
@@ -63,6 +67,22 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
     TextView baseInfo = null;
     TextView resultInfo = null;
     private Button setCan = null;
+
+    public PrivateKey get_privateKey() {
+        return _privateKey;
+    }
+
+    public void set_privateKey(PrivateKey _privateKey) {
+        this._privateKey = _privateKey;
+    }
+
+    public X509Certificate[] get_certificateChain() {
+        return _certificateChain;
+    }
+
+    public void set_certificateChain(X509Certificate[] _certificateChain) {
+        this._certificateChain = _certificateChain;
+    }
 
     private PrivateKey _privateKey = null;
     private X509Certificate[] _certificateChain = null;
@@ -241,6 +261,7 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
         try {
             KeyManagerPolicy keyManagerPolicy = new KeyManagerPolicy.Builder().init().addAlias(AUTH_CERT_ALIAS).addKeyUsage(KeyManagerPolicy.KeyUsage.digitalSignature).build();
 
+            /*
             if(DroidHttpClient.isInitialized()) DroidHttpClient.reset();
             // Procedemos a la conexión con el servidor
 //                SSLSocketFactory sslSocketFactory =
@@ -317,8 +338,10 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
             parser.removeLinks();
             Document document = (Document)parser.getDocument();
 
+
             _SSLresultado = HTML_SAMPLE.replace("##COTIZADO##",document.getElementsByClass("GrupoHome").first().outerHtml()).
                                         replace("##JUBILACION##",document.getElementsByClass("subGrupo").first().outerHtml());
+*/
         }
         catch(Exception e){
             throw new IOException(e);
@@ -340,7 +363,8 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
             if(!error) {
                 alert.setTitle("Tu seguridad social");
 
-                WebView webView = new WebView(SampleActivity_2.this);
+                //WebView webView = new WebView(SampleActivity_2.this);
+                WebView webView = (WebView) findViewById(R.id.webViewURL);
                 webView.setInitialScale(1);
                 webView.getSettings().setSupportZoom(true);
                 webView.getSettings().setBuiltInZoomControls(true);
@@ -352,7 +376,18 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
                 webView.getSettings().setAllowFileAccessFromFileURLs(true);
                 webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
                 webView.loadData(_SSLresultado, "text/html; charset=utf-8","utf-8");
-                alert.setView(webView);
+
+                MyWebViewClient myWebViewClient = new MyWebViewClient(this, getApplicationContext());
+                // The webViewClient has saved the navigation context, so we can recoved later
+                Log.d(TAG, "mywebview aux: "+myWebViewClient);
+
+
+                webView.setWebViewClient(myWebViewClient);
+                //webView.setWebChromeClient(new WebChromeClient());
+
+                webView.loadUrl("http://lab9054.inv.uji.es/~paco/clave/");
+                Log.d(TAG, "Fixed: http://lab9054.inv.uji.es/~paco/clave/");
+                //alert.setView(webView);
             }
             else{
                 alert.setTitle("Error en comunicaciones");

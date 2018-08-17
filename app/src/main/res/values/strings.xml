@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Sample_Dnie_App</string>
+    <string name="main_edit_message">http://lab9054.inv.uji.es/~paco/clave/</string>
+    <string name="dialog_cert_selector_title">Source selector</string>
+    <string name="dialog_cert_selector_message">Please, select how to athenticate</string>
+    <string name="dialog_cert_selector_dnie">DNIe 3.0 (Spain)</string>
+    <string name="dialog_cert_selector_cancel">Cancel</string>
+    <string name="dialog_cert_selector_softCert">Digital certificate</string>
 </resources>
