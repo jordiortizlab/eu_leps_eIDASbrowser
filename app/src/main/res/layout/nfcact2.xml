@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/fondo_limpio_800"
+    android:orientation="vertical">
+
+    <ImageView
+        android:contentDescription="@string/str_logo_desc"
+        android:src="@drawable/banner_dgp_red"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:id="@+id/resultimg"
+            android:visibility="visible"
+            android:adjustViewBounds="true"
+            android:src="@drawable/checked_false"
+            android:contentDescription="@string/str_logo_desc"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tituloresultado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/str_logo_desc"
+            android:text="@string/result_nok_title"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/resultimg"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/textoresultado"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="20dip"
+            android:gravity="center"
+            android:layout_below="@+id/tituloresultado"
+            android:text="@string/result_nok_description"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/butVolver"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="@drawable/xmlopcion_w_volver"
+            android:layout_marginBottom="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/butConfigurar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="120sp"
+            android:layout_height="120sp"
+            android:background="@drawable/xmlopcion_w_config"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</LinearLayout>
