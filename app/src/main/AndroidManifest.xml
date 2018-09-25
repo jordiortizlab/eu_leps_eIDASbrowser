@@ -12,7 +12,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name="com.fnmt.sample_dnie_app.MyAppDNIELECTURA"
         android:roundIcon="@mipmap/ic_launcher_round">
+
 
         <activity
             android:name=".SampleActivity_2"
@@ -23,6 +25,18 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".DNIeCanSelection"
+            android:label = "@string/app_title_CAN"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="NFCOperationsEncKitKat"
+            android:label = "@string/app_title_nfc"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".DataResult"
+            android:label = "@string/app_title_nfc"
+            android:screenOrientation="portrait"/>
+
 
     </application>
 </manifest>
