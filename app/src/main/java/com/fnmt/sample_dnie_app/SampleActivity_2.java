@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +51,7 @@ import static android.view.View.GONE;
 import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
 
-//import com.fnmt.sample_dnie_app.R;
+import com.fnmt.sample_dnie_app.R;
 
 public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.NFCCommReaderFragmentListener, NetworkCommunicationFragment.NetCommFragmentListener, SignatureNotification{
 
@@ -67,6 +69,10 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
     TextView baseInfo = null;
     TextView resultInfo = null;
     private Button setCan = null;
+    private Button startBrowsingButton = null;
+    TextView urlTextView = null;
+    LinearLayout subContainerLL = null;
+    LinearLayout fragmentContainerLL = null;
 
     public PrivateKey get_privateKey() {
         return _privateKey;
@@ -100,6 +106,12 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
         baseInfo = (TextView)this.findViewById(R.id.base_info);
         resultInfo = (TextView)this.findViewById(R.id.result_info);
         setCan = (Button)findViewById(R.id.can_button);
+        startBrowsingButton = (Button)findViewById(R.id.browser_button);
+        urlTextView = (TextView)findViewById(R.id.urlTextView);
+        subContainerLL = (LinearLayout)findViewById(R.id.sub_container);
+        fragmentContainerLL = (LinearLayout)findViewById(R.id.fragment_container);
+
+        urlTextView.setText("http://lab9054.inv.uji.es/~paco/clave/");
 
         setCan.setVisibility(VISIBLE);
 
@@ -111,48 +123,87 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
 
         DroidHttpClient.setAppContext(SampleActivity_2.this);
 
+        startBrowsingButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentContainerLL.setVisibility(View.GONE);
+                LoadBrowser();
+            }
+        });
+
         setCan.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater factory = LayoutInflater.from(SampleActivity_2.this);
-                final View canEntryView = factory.inflate(R.layout.sample_can, null);
-                final AlertDialog ad = new AlertDialog.Builder(SampleActivity_2.this).create();
-                ad.setCancelable(false);
-                ad.setIcon(R.drawable.alert_dialog_icon);
-                ad.setView(canEntryView);
-                ad.setButton(AlertDialog.BUTTON_POSITIVE, "Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        EditText text = (EditText) ad.findViewById(R.id.can_edit);
-                        can = new CANSpecDO(text.getText().toString(), "", "");
-                        CANSpecDOStore store = new CANSpecDOStore(SampleActivity_2.this);
-                        store.getAll();
+                Intent intent = new Intent(SampleActivity_2.this,  DNIeCanSelection.class);
+                startActivityForResult(intent, 1);
 
-                        setCan.setVisibility(GONE);
-
-//                      Argumentos para el fragment NFC : CAN y si queremos precargar los certificados (solicitud de PIN)
-                        Bundle arg = new Bundle();
-                        arg.putParcelable(NFCCommunicationFragment.CAN_ARGUMENT_KEY_STRING, can);
-                        arg.putBoolean(NFCCommunicationFragment.PRELOADKEYSTORE_ARGUMENT_KEY_STRING, true);
-                        _readerFragment = new NFCCommunicationFragment();
-                        _readerFragment.setArguments(arg);
-
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragment_container, _readerFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
-                    }
-                });
-                ad.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which){
-                        finish();
-                    }
-                });
-                ad.show();
+//                LayoutInflater factory = LayoutInflater.from(SampleActivity_2.this);
+//                final View canEntryView = factory.inflate(R.layout.sample_can, null);
+//                final AlertDialog ad = new AlertDialog.Builder(SampleActivity_2.this).create();
+//                ad.setCancelable(false);
+//                ad.setIcon(R.drawable.alert_dialog_icon);
+//                ad.setView(canEntryView);
+//                ad.setButton(AlertDialog.BUTTON_POSITIVE, "Aceptar", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        EditText text = (EditText) ad.findViewById(R.id.can_edit);
+//                        can = new CANSpecDO(text.getText().toString(), "", "");
+//                        CANSpecDOStore store = new CANSpecDOStore(SampleActivity_2.this);
+//                        store.getAll();
+//
+//                        setCan.setVisibility(GONE);
+//
+////                      Argumentos para el fragment NFC : CAN y si queremos precargar los certificados (solicitud de PIN)
+//                        Bundle arg = new Bundle();
+//                        arg.putParcelable(NFCCommunicationFragment.CAN_ARGUMENT_KEY_STRING, can);
+//                        arg.putBoolean(NFCCommunicationFragment.PRELOADKEYSTORE_ARGUMENT_KEY_STRING, true);
+//                        _readerFragment = new NFCCommunicationFragment();
+//                        _readerFragment.setArguments(arg);
+//
+//                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                        transaction.replace(R.id.fragment_container, _readerFragment);
+//                        transaction.addToBackStack(null);
+//                        transaction.commit();
+//                    }
+//                });
+//                ad.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which){
+//                        finish();
+//                    }
+//                });
+//                ad.show();
             }
         });
 
         //Indicamos quién va a manejar las notificaciones de firma (implementa interfaz es.gob.fnmt.gui.SignatureNotification)
         NFCCommReaderFragment.setSignatureNotification(this);
+    }
+
+    void LoadBrowser() {
+        WebView webView = (WebView) findViewById(R.id.webViewURL);
+        webView.setInitialScale(1);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setUseWideViewPort(true);
+
+        webView.getSettings().setAllowContentAccess(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setAllowFileAccessFromFileURLs(true);
+        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        webView.loadData(_SSLresultado, "text/html; charset=utf-8","utf-8");
+
+        MyWebViewClient myWebViewClient = new MyWebViewClient(this, getApplicationContext());
+        // The webViewClient has saved the navigation context, so we can recoved later
+        Log.d(TAG, "mywebview aux: "+myWebViewClient);
+
+
+        webView.setWebViewClient(myWebViewClient);
+        //webView.setWebChromeClient(new WebChromeClient());
+
+        webView.loadUrl("http://lab9054.inv.uji.es/~paco/clave/");
+        Log.d(TAG, "Fixed: http://lab9054.inv.uji.es/~paco/clave/");
+        //alert.setView(webView);
+
     }
 
     /** Callback Interfaz es.gob.fnmt.gui.fragment.NFCCommReaderFragment.NFCCommReaderFragmentListener */
