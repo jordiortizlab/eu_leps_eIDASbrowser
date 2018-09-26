@@ -1,42 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.fnmt.sample_dnie_app">
+    package="com.fnmt.sample_dnie_app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NFC" />
 
     <uses-feature
         android:name="android.hardware.nfc"
-        android:required="true"/>
+        android:required="true" />
 
     <application
+        android:name=".MyAppDNIELECTURA"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name="com.fnmt.sample_dnie_app.MyAppDNIELECTURA"
         android:roundIcon="@mipmap/ic_launcher_round">
-
-
         <activity
             android:name=".SampleActivity_2"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DNIeCanSelection"
-            android:label = "@string/app_title_CAN"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="NFCOperationsEncKitKat"
-            android:label = "@string/app_title_nfc"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".DataResult"
-            android:label = "@string/app_title_nfc"
-            android:screenOrientation="portrait"/>
-
-
+        <activity
+            android:name=".DNIeCanSelection"
+            android:label="@string/app_title_CAN"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NFCOperationsEncKitKat"
+            android:label="@string/app_title_nfc"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataResult"
+            android:label="@string/app_title_nfc"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReadCrypto"
+            android:label="@string/title_activity_read_crypto"
+            android:parentActivityName=".SampleActivity_2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fnmt.sample_dnie_app.SampleActivity_2" />
+        </activity>
     </application>
+
 </manifest>

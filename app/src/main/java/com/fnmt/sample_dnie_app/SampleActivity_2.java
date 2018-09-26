@@ -53,8 +53,8 @@ import static android.view.View.VISIBLE;
 
 import com.fnmt.sample_dnie_app.R;
 
-public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.NFCCommReaderFragmentListener, NetworkCommunicationFragment.NetCommFragmentListener, SignatureNotification{
-
+//public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.NFCCommReaderFragmentListener, NetworkCommunicationFragment.NetCommFragmentListener, SignatureNotification{
+public class SampleActivity_2 extends Activity {
     private static final String TAG = SampleActivity_2.class.getSimpleName();
 
     private static final String AUTH_CERT_ALIAS = "CertAutenticacion";
@@ -73,25 +73,26 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
     TextView urlTextView = null;
     LinearLayout subContainerLL = null;
     LinearLayout fragmentContainerLL = null;
+    LinearLayout buttonContainerLL = null;
 
-    public PrivateKey get_privateKey() {
-        return _privateKey;
-    }
+//    public PrivateKey get_privateKey() {
+//        return _privateKey;
+//    }
+//
+//    public void set_privateKey(PrivateKey _privateKey) {
+//        this._privateKey = _privateKey;
+//    }
+//
+//    public X509Certificate[] get_certificateChain() {
+//        return _certificateChain;
+//    }
+//
+//    public void set_certificateChain(X509Certificate[] _certificateChain) {
+//        this._certificateChain = _certificateChain;
+//    }
 
-    public void set_privateKey(PrivateKey _privateKey) {
-        this._privateKey = _privateKey;
-    }
-
-    public X509Certificate[] get_certificateChain() {
-        return _certificateChain;
-    }
-
-    public void set_certificateChain(X509Certificate[] _certificateChain) {
-        this._certificateChain = _certificateChain;
-    }
-
-    private PrivateKey _privateKey = null;
-    private X509Certificate[] _certificateChain = null;
+//    private PrivateKey _privateKey = null;
+//    private X509Certificate[] _certificateChain = null;
 
     NFCCommunicationFragment _readerFragment = null;
     NetworkCommunicationFragment _networkFragment = null;
@@ -103,13 +104,14 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_activity);
 
-        baseInfo = (TextView)this.findViewById(R.id.base_info);
-        resultInfo = (TextView)this.findViewById(R.id.result_info);
-        setCan = (Button)findViewById(R.id.can_button);
-        startBrowsingButton = (Button)findViewById(R.id.browser_button);
-        urlTextView = (TextView)findViewById(R.id.urlTextView);
-        subContainerLL = (LinearLayout)findViewById(R.id.sub_container);
-        fragmentContainerLL = (LinearLayout)findViewById(R.id.fragment_container);
+        baseInfo = (TextView) this.findViewById(R.id.base_info);
+        resultInfo = (TextView) this.findViewById(R.id.result_info);
+        setCan = (Button) findViewById(R.id.can_button);
+        startBrowsingButton = (Button) findViewById(R.id.browser_button);
+        urlTextView = (TextView) findViewById(R.id.urlTextView);
+        subContainerLL = (LinearLayout) findViewById(R.id.sub_container);
+        fragmentContainerLL = (LinearLayout) findViewById(R.id.fragment_container);
+        buttonContainerLL = (LinearLayout) findViewById(R.id.buttonsLayout);
 
         urlTextView.setText("http://lab9054.inv.uji.es/~paco/clave/");
 
@@ -127,6 +129,14 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
             @Override
             public void onClick(View v) {
                 fragmentContainerLL.setVisibility(View.GONE);
+                buttonContainerLL.setVisibility(View.GONE);
+
+                CANSpecDO can = ((MyAppDNIELECTURA) getApplicationContext()).getCAN();
+                CANSpecDOStore store = new CANSpecDOStore(SampleActivity_2.this);
+                ((MyAppDNIELECTURA) getApplicationContext()).setCanStore(store);
+                store.getAll();
+
+
                 LoadBrowser();
             }
         });
@@ -134,7 +144,8 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
         setCan.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SampleActivity_2.this,  DNIeCanSelection.class);
+                // TODO: Evitar que se haga la lectura del DNIe y se muestren los datos, con seleccionar el CAN basta.
+                Intent intent = new Intent(SampleActivity_2.this, DNIeCanSelection.class);
                 startActivityForResult(intent, 1);
 
 //                LayoutInflater factory = LayoutInflater.from(SampleActivity_2.this);
@@ -175,7 +186,15 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
         });
 
         //Indicamos quién va a manejar las notificaciones de firma (implementa interfaz es.gob.fnmt.gui.SignatureNotification)
-        NFCCommReaderFragment.setSignatureNotification(this);
+//        NFCCommReaderFragment.setSignatureNotification(this);
+    }
+
+    void makeSubContainerVisible() {
+        subContainerLL.setVisibility(VISIBLE);
+    }
+
+    void makeSubContainerInVisible() {
+        subContainerLL.setVisibility(GONE);
     }
 
     void LoadBrowser() {
@@ -190,11 +209,12 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
         webView.getSettings().setAllowFileAccess(true);
         webView.getSettings().setAllowFileAccessFromFileURLs(true);
         webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-        webView.loadData(_SSLresultado, "text/html; charset=utf-8","utf-8");
+        webView.loadData(_SSLresultado, "text/html; charset=utf-8", "utf-8");
 
         MyWebViewClient myWebViewClient = new MyWebViewClient(this, getApplicationContext());
+        ((MyAppDNIELECTURA) getApplicationContext()).setWebViewClient(myWebViewClient);
         // The webViewClient has saved the navigation context, so we can recoved later
-        Log.d(TAG, "mywebview aux: "+myWebViewClient);
+        Log.d(TAG, "mywebview aux: " + myWebViewClient);
 
 
         webView.setWebViewClient(myWebViewClient);
@@ -205,285 +225,286 @@ public class SampleActivity_2 extends Activity implements NFCCommReaderFragment.
         //alert.setView(webView);
 
     }
-
-    /** Callback Interfaz es.gob.fnmt.gui.fragment.NFCCommReaderFragment.NFCCommReaderFragmentListener */
-    @Override
-    public CANSpecDO getCanToStore(KeyStore keyStore, String can) throws KeyStoreException {
-
-        DG1_Dnie data1 = ((DnieKeyStore)keyStore).getDatagroup1();
-//        DG2 data2 = ((DnieKeyStore)keyStore).getDatagroup2();
-//        DG7 data7 = ((DnieKeyStore)keyStore).getDatagroup7();
-//        DG11 data11 = ((DnieKeyStore)keyStore).getDatagroup11();
-//        DG13 data13 = ((DnieKeyStore)keyStore).getDatagroup13();
-
-        EF_COM dataef = ((DnieKeyStore)keyStore).getEFCOM();
-
-        /**********************DNIE********************************/
-        String certSubject = ((X509Certificate) keyStore.getCertificate(AUTH_CERT_ALIAS)).getSubjectDN().toString();
-
-        try {
-            _privateKey = (PrivateKey) keyStore.getKey(AUTH_CERT_ALIAS,null);
-            _certificateChain = (X509Certificate[]) keyStore.getCertificateChain(AUTH_CERT_ALIAS);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnrecoverableKeyException e) {
-            e.printStackTrace();
-        }
-
-        return new CANSpecDO(can,
-                            certSubject.substring((certSubject.indexOf("CN=")+3)),
-                            certSubject.substring((certSubject.indexOf("NIF ")==-1?(certSubject.indexOf("OID.2.5.4.5=")+12):(certSubject.indexOf("NIF ")+4))));
-    }
-
-    /** Callback Interfaz es.gob.fnmt.gui.fragment.NFCCommReaderFragment.NFCCommReaderFragmentListener */
-    @Override
-    public void doNotify(final NFC_callback_notify notify, String msg, boolean error) {
-        String message =msg;
-        switch (notify){
-            case NFC_TASK_INIT:
-                _readerFragment.updateInfo(notify,"Comunicando con Dnie", "estableciendo canal seguro...");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        resultInfo.setVisibility(GONE);
-                    }
-                });
-                break;
-            case NFC_TASK_UPDATE:
-                _readerFragment.updateInfo(notify,"Comunicando con Dnie", "obteniendo información...");
-                break;
-            case NETWORKCOMM_TASK_INIT:
-                message = "Connectando con sitio web...";
-                break;
-            case NETWORKCOMM_TASK_DONE:
-                message = "Conexión finalizada.";
-                break;
-            case ERROR:
-                _readerFragment.updateInfo(notify, "Error en comunicación", message);
-                if(msg.contains("CAN incorrecto")){
-                    Toast.makeText(this.getApplicationContext(),msg, Toast.LENGTH_LONG).show();
-                    setCan.setVisibility(VISIBLE);
-
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.remove(_readerFragment);
-                    transaction.commit();
-                    return;
-                }
-                break;
-            default:
-                _readerFragment.updateInfo(notify, "Comunicando con Dnie", message);
-
-        }
-
-        if(notify == NFC_callback_notify.NFC_TASK_FINISHED){
-            if(!error) {
-
-                ProgressDialog myProgressDialog = new ProgressDialog(this);
-
-                myProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myProgressDialog.setTitle("Descargando datos");
-                myProgressDialog.setMessage("");
-                myProgressDialog.setProgress(0);
-                myProgressDialog.setMax(100);
-
-                _myNetProgressDialog = new ProgressDialogUI.Builder(myProgressDialog)
-                                        .contentLayout(R.layout.progress)
-                                        .progressBar(R.id.externalProgressRead)
-                                        .title(R.id.title)
-                                        .description(R.id.messages)
-                                        .build();
-
-                _networkFragment = new NetworkCommunicationFragment();
-                _networkFragment.setDialog(_myNetProgressDialog,false);
-
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, _networkFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }else{
-                resultInfo.setText(msg);
-            }
-        }
-    }
-
-    //Callback para la interfaz es.gob.fnmt.gui.fragment.NetworkCommunicationFragment.NetCommFragmentListener
-    @Override
-    public void netConnDownload() throws IOException {
-        try {
-            KeyManagerPolicy keyManagerPolicy = new KeyManagerPolicy.Builder().init().addAlias(AUTH_CERT_ALIAS).addKeyUsage(KeyManagerPolicy.KeyUsage.digitalSignature).build();
-
-            /*
-            if(DroidHttpClient.isInitialized()) DroidHttpClient.reset();
-            // Procedemos a la conexión con el servidor
-//                SSLSocketFactory sslSocketFactory =
-                DroidHttpClient.getBuilder()
-                        .clientKeyStore(NFCCommReaderFragment.getKeyStore())
-                        .trustKeyStore(DroidHttpClient.getKeyStoreFromResource(R.raw.truststore))
-//                        .keyManagerPolicy(new KeyManagerPolicy.Builder().init().addKeyUsage(KeyManagerPolicy.KeyUsage.digitalSignature).build())
-                        .keyManagerPolicy(new KeyManagerPolicy.Builder().init().addAlias(AUTH_CERT_ALIAS).addKeyUsage(KeyManagerPolicy.KeyUsage.digitalSignature).build())
-//                            .enableCustomRedirectHandler()
-                            .done();
-//                        .getSSLSocketFactory();
-//                HttpsURLConnection.setDefaultSSLSocketFactory(sslSocketFactory);
-
-            runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                _myNetProgressDialog.setTitle("Descargando datos...");
-                                _myNetProgressDialog.setMessage("Primera llamada");
-                                _myNetProgressDialog.incrementProgressBy(17);
-                            }
-                        });
-
-            DroidHttpClient.Parse parser = new DroidHttpClient.Parse(DroidHttpClient.getHTMLContent(URL_TUSEGURIDADSOCIAL));
-
-            Elements elements = parser.getDocument().getElementsByAttributeValue("value", "ACCEDER CON DNI O CERTIFICADO");
-            String actionUrl = elements.first().parent().attr("action");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    _myNetProgressDialog.setMessage("Segunda llamada");
-                    _myNetProgressDialog.incrementProgressBy(17);
-                }
-            });
-            parser = new DroidHttpClient.Parse(DroidHttpClient.getHTMLContent(actionUrl));
-
-//            String url = URL_COTIZACIONES;
-            Element form = parser.getDocument().getElementById("formCapturaMovil");
-            String url = URL_TUSEGURIDADSOCIAL + form.attr("action").trim() + "?prefijo=&movil=&tipoAccionCapDatosSol=CANCELAR#Z7_5090HKK0K8M4C0AERR78H700O5";
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    _myNetProgressDialog.setMessage("Tercera llamada");
-                    _myNetProgressDialog.incrementProgressBy(17);
-                }
-            });
-            parser = new DroidHttpClient.Parse(DroidHttpClient.getHTMLContent(url));
-
-            url = URL_TUSEGURIDADSOCIAL+parser.getDocument().getElementById("urlRecarga").val()+"?paso=1";
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    _myNetProgressDialog.setMessage("Cuarta llamada");
-                    _myNetProgressDialog.incrementProgressBy(17);
-                }
-            });
-            String data = DroidHttpClient.getHTMLContent(url);
-
-            url = URL_TUSEGURIDADSOCIAL+parser.getDocument().getElementById("portletActual").val()+"?paso=2";
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    _myNetProgressDialog.setMessage("Última llamada");
-                    _myNetProgressDialog.incrementProgressBy(17);
-                }
-            });
-            parser = new DroidHttpClient.Parse(DroidHttpClient.getHTMLContent(url));
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    _myNetProgressDialog.setProgress(_myNetProgressDialog.getMaxSize());
-                }
-            });
-
-            parser.removeLinks();
-            Document document = (Document)parser.getDocument();
-
-
-            _SSLresultado = HTML_SAMPLE.replace("##COTIZADO##",document.getElementsByClass("GrupoHome").first().outerHtml()).
-                                        replace("##JUBILACION##",document.getElementsByClass("subGrupo").first().outerHtml());
-*/
-        }
-        catch(Exception e){
-            throw new IOException(e);
-        }
-    }
-
-    //Callback para la interfaz import es.gob.fnmt.gui.fragment.NetworkCommunicationFragment.NetCommFragmentListener
-    @Override
-    public void netConnDone(boolean error) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(SampleActivity_2.this);
-        alert.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                setCan.setVisibility(VISIBLE);
-                dialog.dismiss();
-            }
-        });
-        try {
-            if(!error) {
-                alert.setTitle("Tu seguridad social");
-
-                //WebView webView = new WebView(SampleActivity_2.this);
-                WebView webView = (WebView) findViewById(R.id.webViewURL);
-                webView.setInitialScale(1);
-                webView.getSettings().setSupportZoom(true);
-                webView.getSettings().setBuiltInZoomControls(true);
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setUseWideViewPort(true);
-
-                webView.getSettings().setAllowContentAccess(true);
-                webView.getSettings().setAllowFileAccess(true);
-                webView.getSettings().setAllowFileAccessFromFileURLs(true);
-                webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-                webView.loadData(_SSLresultado, "text/html; charset=utf-8","utf-8");
-
-                MyWebViewClient myWebViewClient = new MyWebViewClient(this, getApplicationContext());
-                // The webViewClient has saved the navigation context, so we can recoved later
-                Log.d(TAG, "mywebview aux: "+myWebViewClient);
-
-
-                webView.setWebViewClient(myWebViewClient);
-                //webView.setWebChromeClient(new WebChromeClient());
-
-                webView.loadUrl("http://lab9054.inv.uji.es/~paco/clave/");
-                Log.d(TAG, "Fixed: http://lab9054.inv.uji.es/~paco/clave/");
-                //alert.setView(webView);
-            }
-            else{
-                alert.setTitle("Error en comunicaciones");
-                alert.setTitle("Se ha producido un error en la petición de información.");
-            }
-        }catch (Exception e){
-            alert.setTitle("Error en aplicación:");
-            alert.setTitle("Se ha generado una excepción:"+e.getMessage());
-        }
-        alert.show();
-    }
-
-
-    //Callback para la interfaz es.gob.fnmt.gui.SignatureNotification
-    @Override
-    public void doNotify(sign_callback_notify notify, String msg) {
-        final String message;
-        switch(notify){
-            case SIGNATURE_INIT:
-                message = "Iniciando firma, no retire el DNIe del dispositivo NFC.";
-                break;
-            case SIGNATURE_UPDATE:
-                message = "Actualizando datos a firmar.";
-                break;
-            case SIGNATURE_START:
-                message = "Firmando los datos.";
-                break;
-            case SIGNATURE_DONE:
-                message = "Firma realizada, puede retirar el DNIe. Continuando con descarga de datos...";
-                break;
-            default:
-                message = null;
-        }
-        runOnUiThread(new Runnable() {
-              @Override
-              public void run() {
-                  baseInfo.setText("Proceso de firma");
-                  if (message != null) {
-                      resultInfo.setText(message);
-                      resultInfo.setVisibility(VISIBLE);
-                  }
-              }
-          });
-    }
 }
+
+    /** Callback Interfaz es.gob.fnmt.gui.fragment.NFCCommReaderFragment.NFCCommReaderFragmentListener */
+//    @Override
+//    public CANSpecDO getCanToStore(KeyStore keyStore, String can) throws KeyStoreException {
+//
+//        DG1_Dnie data1 = ((DnieKeyStore)keyStore).getDatagroup1();
+////        DG2 data2 = ((DnieKeyStore)keyStore).getDatagroup2();
+////        DG7 data7 = ((DnieKeyStore)keyStore).getDatagroup7();
+////        DG11 data11 = ((DnieKeyStore)keyStore).getDatagroup11();
+////        DG13 data13 = ((DnieKeyStore)keyStore).getDatagroup13();
+//
+//        EF_COM dataef = ((DnieKeyStore)keyStore).getEFCOM();
+//
+//        /**********************DNIE********************************/
+//        String certSubject = ((X509Certificate) keyStore.getCertificate(AUTH_CERT_ALIAS)).getSubjectDN().toString();
+//
+//        try {
+//            _privateKey = (PrivateKey) keyStore.getKey(AUTH_CERT_ALIAS,null);
+//            _certificateChain = (X509Certificate[]) keyStore.getCertificateChain(AUTH_CERT_ALIAS);
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        } catch (UnrecoverableKeyException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return new CANSpecDO(can,
+//                            certSubject.substring((certSubject.indexOf("CN=")+3)),
+//                            certSubject.substring((certSubject.indexOf("NIF ")==-1?(certSubject.indexOf("OID.2.5.4.5=")+12):(certSubject.indexOf("NIF ")+4))));
+//    }
+//
+//    /** Callback Interfaz es.gob.fnmt.gui.fragment.NFCCommReaderFragment.NFCCommReaderFragmentListener */
+//    @Override
+//    public void doNotify(final NFC_callback_notify notify, String msg, boolean error) {
+//        String message =msg;
+//        switch (notify){
+//            case NFC_TASK_INIT:
+//                _readerFragment.updateInfo(notify,"Comunicando con Dnie", "estableciendo canal seguro...");
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        resultInfo.setVisibility(GONE);
+//                    }
+//                });
+//                break;
+//            case NFC_TASK_UPDATE:
+//                _readerFragment.updateInfo(notify,"Comunicando con Dnie", "obteniendo información...");
+//                break;
+//            case NETWORKCOMM_TASK_INIT:
+//                message = "Connectando con sitio web...";
+//                break;
+//            case NETWORKCOMM_TASK_DONE:
+//                message = "Conexión finalizada.";
+//                break;
+//            case ERROR:
+//                _readerFragment.updateInfo(notify, "Error en comunicación", message);
+//                if(msg.contains("CAN incorrecto")){
+//                    Toast.makeText(this.getApplicationContext(),msg, Toast.LENGTH_LONG).show();
+//                    setCan.setVisibility(VISIBLE);
+//
+//                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                    transaction.remove(_readerFragment);
+//                    transaction.commit();
+//                    return;
+//                }
+//                break;
+//            default:
+//                _readerFragment.updateInfo(notify, "Comunicando con Dnie", message);
+//
+//        }
+//
+//        if(notify == NFC_callback_notify.NFC_TASK_FINISHED){
+//            if(!error) {
+//
+//                ProgressDialog myProgressDialog = new ProgressDialog(this);
+//
+//                myProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                myProgressDialog.setTitle("Descargando datos");
+//                myProgressDialog.setMessage("");
+//                myProgressDialog.setProgress(0);
+//                myProgressDialog.setMax(100);
+//
+//                _myNetProgressDialog = new ProgressDialogUI.Builder(myProgressDialog)
+//                                        .contentLayout(R.layout.progress)
+//                                        .progressBar(R.id.externalProgressRead)
+//                                        .title(R.id.title)
+//                                        .description(R.id.messages)
+//                                        .build();
+//
+//                _networkFragment = new NetworkCommunicationFragment();
+//                _networkFragment.setDialog(_myNetProgressDialog,false);
+//
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.fragment_container, _networkFragment);
+//                transaction.addToBackStack(null);
+//                transaction.commit();
+//            }else{
+//                resultInfo.setText(msg);
+//            }
+//        }
+//    }
+//
+//    //Callback para la interfaz es.gob.fnmt.gui.fragment.NetworkCommunicationFragment.NetCommFragmentListener
+//    @Override
+//    public void netConnDownload() throws IOException {
+//        try {
+//            KeyManagerPolicy keyManagerPolicy = new KeyManagerPolicy.Builder().init().addAlias(AUTH_CERT_ALIAS).addKeyUsage(KeyManagerPolicy.KeyUsage.digitalSignature).build();
+//
+//            /*
+//            if(DroidHttpClient.isInitialized()) DroidHttpClient.reset();
+//            // Procedemos a la conexión con el servidor
+////                SSLSocketFactory sslSocketFactory =
+//                DroidHttpClient.getBuilder()
+//                        .clientKeyStore(NFCCommReaderFragment.getKeyStore())
+//                        .trustKeyStore(DroidHttpClient.getKeyStoreFromResource(R.raw.truststore))
+////                        .keyManagerPolicy(new KeyManagerPolicy.Builder().init().addKeyUsage(KeyManagerPolicy.KeyUsage.digitalSignature).build())
+//                        .keyManagerPolicy(new KeyManagerPolicy.Builder().init().addAlias(AUTH_CERT_ALIAS).addKeyUsage(KeyManagerPolicy.KeyUsage.digitalSignature).build())
+////                            .enableCustomRedirectHandler()
+//                            .done();
+////                        .getSSLSocketFactory();
+////                HttpsURLConnection.setDefaultSSLSocketFactory(sslSocketFactory);
+//
+//            runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                _myNetProgressDialog.setTitle("Descargando datos...");
+//                                _myNetProgressDialog.setMessage("Primera llamada");
+//                                _myNetProgressDialog.incrementProgressBy(17);
+//                            }
+//                        });
+//
+//            DroidHttpClient.Parse parser = new DroidHttpClient.Parse(DroidHttpClient.getHTMLContent(URL_TUSEGURIDADSOCIAL));
+//
+//            Elements elements = parser.getDocument().getElementsByAttributeValue("value", "ACCEDER CON DNI O CERTIFICADO");
+//            String actionUrl = elements.first().parent().attr("action");
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    _myNetProgressDialog.setMessage("Segunda llamada");
+//                    _myNetProgressDialog.incrementProgressBy(17);
+//                }
+//            });
+//            parser = new DroidHttpClient.Parse(DroidHttpClient.getHTMLContent(actionUrl));
+//
+////            String url = URL_COTIZACIONES;
+//            Element form = parser.getDocument().getElementById("formCapturaMovil");
+//            String url = URL_TUSEGURIDADSOCIAL + form.attr("action").trim() + "?prefijo=&movil=&tipoAccionCapDatosSol=CANCELAR#Z7_5090HKK0K8M4C0AERR78H700O5";
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    _myNetProgressDialog.setMessage("Tercera llamada");
+//                    _myNetProgressDialog.incrementProgressBy(17);
+//                }
+//            });
+//            parser = new DroidHttpClient.Parse(DroidHttpClient.getHTMLContent(url));
+//
+//            url = URL_TUSEGURIDADSOCIAL+parser.getDocument().getElementById("urlRecarga").val()+"?paso=1";
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    _myNetProgressDialog.setMessage("Cuarta llamada");
+//                    _myNetProgressDialog.incrementProgressBy(17);
+//                }
+//            });
+//            String data = DroidHttpClient.getHTMLContent(url);
+//
+//            url = URL_TUSEGURIDADSOCIAL+parser.getDocument().getElementById("portletActual").val()+"?paso=2";
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    _myNetProgressDialog.setMessage("Última llamada");
+//                    _myNetProgressDialog.incrementProgressBy(17);
+//                }
+//            });
+//            parser = new DroidHttpClient.Parse(DroidHttpClient.getHTMLContent(url));
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    _myNetProgressDialog.setProgress(_myNetProgressDialog.getMaxSize());
+//                }
+//            });
+//
+//            parser.removeLinks();
+//            Document document = (Document)parser.getDocument();
+//
+//
+//            _SSLresultado = HTML_SAMPLE.replace("##COTIZADO##",document.getElementsByClass("GrupoHome").first().outerHtml()).
+//                                        replace("##JUBILACION##",document.getElementsByClass("subGrupo").first().outerHtml());
+//*/
+//        }
+//        catch(Exception e){
+//            throw new IOException(e);
+//        }
+//    }
+//
+//    //Callback para la interfaz import es.gob.fnmt.gui.fragment.NetworkCommunicationFragment.NetCommFragmentListener
+//    @Override
+//    public void netConnDone(boolean error) {
+//        AlertDialog.Builder alert = new AlertDialog.Builder(SampleActivity_2.this);
+//        alert.setNegativeButton("Salir", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int id) {
+//                setCan.setVisibility(VISIBLE);
+//                dialog.dismiss();
+//            }
+//        });
+//        try {
+//            if(!error) {
+//                alert.setTitle("Tu seguridad social");
+//
+//                //WebView webView = new WebView(SampleActivity_2.this);
+//                WebView webView = (WebView) findViewById(R.id.webViewURL);
+//                webView.setInitialScale(1);
+//                webView.getSettings().setSupportZoom(true);
+//                webView.getSettings().setBuiltInZoomControls(true);
+//                webView.getSettings().setJavaScriptEnabled(true);
+//                webView.getSettings().setUseWideViewPort(true);
+//
+//                webView.getSettings().setAllowContentAccess(true);
+//                webView.getSettings().setAllowFileAccess(true);
+//                webView.getSettings().setAllowFileAccessFromFileURLs(true);
+//                webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+//                webView.loadData(_SSLresultado, "text/html; charset=utf-8","utf-8");
+//
+//                MyWebViewClient myWebViewClient = new MyWebViewClient(this, getApplicationContext());
+//                // The webViewClient has saved the navigation context, so we can recoved later
+//                Log.d(TAG, "mywebview aux: "+myWebViewClient);
+//
+//
+//                webView.setWebViewClient(myWebViewClient);
+//                //webView.setWebChromeClient(new WebChromeClient());
+//
+//                webView.loadUrl("http://lab9054.inv.uji.es/~paco/clave/");
+//                Log.d(TAG, "Fixed: http://lab9054.inv.uji.es/~paco/clave/");
+//                //alert.setView(webView);
+//            }
+//            else{
+//                alert.setTitle("Error en comunicaciones");
+//                alert.setTitle("Se ha producido un error en la petición de información.");
+//            }
+//        }catch (Exception e){
+//            alert.setTitle("Error en aplicación:");
+//            alert.setTitle("Se ha generado una excepción:"+e.getMessage());
+//        }
+//        alert.show();
+//    }
+//
+//
+//    //Callback para la interfaz es.gob.fnmt.gui.SignatureNotification
+//    @Override
+//    public void doNotify(sign_callback_notify notify, String msg) {
+//        final String message;
+//        switch(notify){
+//            case SIGNATURE_INIT:
+//                message = "Iniciando firma, no retire el DNIe del dispositivo NFC.";
+//                break;
+//            case SIGNATURE_UPDATE:
+//                message = "Actualizando datos a firmar.";
+//                break;
+//            case SIGNATURE_START:
+//                message = "Firmando los datos.";
+//                break;
+//            case SIGNATURE_DONE:
+//                message = "Firma realizada, puede retirar el DNIe. Continuando con descarga de datos...";
+//                break;
+//            default:
+//                message = null;
+//        }
+//        runOnUiThread(new Runnable() {
+//              @Override
+//              public void run() {
+//                  baseInfo.setText("Proceso de firma");
+//                  if (message != null) {
+//                      resultInfo.setText(message);
+//                      resultInfo.setVisibility(VISIBLE);
+//                  }
+//              }
+//          });
+//    }
+//}
 
 //class MyPasswordDialog implements DialogUIHandler {
 //

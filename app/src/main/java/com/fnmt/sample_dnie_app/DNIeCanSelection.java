@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -332,8 +333,19 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 		selectedBac = listA.getItem(position);
 		
 		// Si la pulsación es corta, directamente leemos con ese CAN
-		read(selectedBac);
-	}
+		//read(selectedBac); // LEER DEL DNIe la INFO. NO LO NECESITAMOS!!
+
+        // LEPS: Tomamos el CAN y se lo pasamos a la librería de escritura, volvemos a la App para que siga el browser
+        ((MyAppDNIELECTURA)getApplicationContext()).setCAN(selectedBac);
+        Intent myResultIntent = new Intent(DNIeCanSelection.this, ReadCrypto.class);
+        Bundle b = new Bundle();
+        b.putByteArray("CAN",   selectedBac.getCanNumber().getBytes());
+
+
+        myResultIntent.putExtras(b);
+        startActivityForResult(myResultIntent, 1);
+
+    }
 	
 	private void refreshAdapter() {
 		m_adapter.clear();

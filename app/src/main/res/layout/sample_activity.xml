@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:background="@color/bg_gray"
-              android:orientation="vertical"
-              android:id="@+id/sample_container">
-
-    <TextView
-        android:id="@+id/base_info"
-        android:visibility="visible"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_gravity="center"
-        android:text="Ejemplo Dnie Activity"
-        android:textColor="@color/TextColor"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/result_info"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_gravity="center"
-        android:text="Resultado"
-        android:textColor="@color/TextColor"
-        android:textSize="18sp"/>
-
-    <Button
-        android:id="@+id/can_button"
-        android:visibility="gone"
-        android:background="@drawable/button_shape"
-        android:layout_margin="10dp"
-        android:clickable="true"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/PureWhite"
-        android:text="Establecer can"
-        android:layout_gravity="center"
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/urlTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/browser_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start Browsing" />
+    android:id="@+id/sample_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical"
+    android:weightSum="1.0">
 
     <LinearLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/base_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dip"
+            android:text="Ejemplo Dnie Activity"
+            android:textColor="@color/TextColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/result_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:text="Resultado"
+            android:textColor="@color/TextColor"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/can_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_shape"
+            android:clickable="true"
+            android:padding="5dp"
+            android:text="Establecer can"
+            android:textColor="@color/PureWhite"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/urlTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/browser_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Browsing" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sub_container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/sub_container"
+        android:layout_weight="0.3"
         android:orientation="vertical">
 
         <LinearLayout
@@ -69,10 +79,10 @@
             android:orientation="vertical"></LinearLayout>
 
         <LinearLayout
+            android:id="@+id/webviewlayout"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:id="@+id/webviewlayout"
             android:orientation="vertical">
 
             <WebView
@@ -81,9 +91,7 @@
                 android:layout_height="fill_parent" />
 
         </LinearLayout>
-    </LinearLayout >
-
-
+    </LinearLayout>
 
 
 </LinearLayout>

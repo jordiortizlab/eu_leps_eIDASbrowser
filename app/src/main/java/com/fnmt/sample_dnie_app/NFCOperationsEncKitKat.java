@@ -230,8 +230,7 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
             if(m_dg11!=null)b.putByteArray("DGP_DG11",  m_dg11.getBytes());
 
             // Pasamos los datos a la activity correspondiente
-            // TODO: Go Back to SampleActivity_2
-            Intent myResultIntent = new Intent(NFCOperationsEncKitKat.this, DataResult.class);
+            Intent myResultIntent = new Intent(NFCOperationsEncKitKat.this, ReadCrypto.class);
             myResultIntent.putExtras(b);
             startActivityForResult(myResultIntent, 1);
         }

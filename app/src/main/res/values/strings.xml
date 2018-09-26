@@ -100,4 +100,6 @@
     <string name="help_detail_load">Permite leer su documento DNI electrónico 3.0 ó Pasaporte, accediendo a la información pública.</string>
     <string name="help_detail_config">Opciones de configuración de la aplicación. Desde aquí puede elegir a qué datos públicos de su DNIe/Pasaporte desea acceder.</string>
     <string name="help_detail_help">Muestra esta pantalla de ayuda de la aplicación.</string>
+    <string name="title_activity_read_crypto">ReadCrypto</string>
+    <string name="action_settings">Settings</string>
 </resources>

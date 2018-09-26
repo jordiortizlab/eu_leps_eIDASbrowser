@@ -29,7 +29,7 @@ import java.security.cert.X509Certificate;
  * Created by emtg on 23/7/18.
  */
 
-public class MyWebViewClient extends WebViewClient {
+public class MyWebViewClient extends WebViewClient implements IDNIeEventsCallback {
 
     private static final String TAG = MyWebViewClient.class.getSimpleName();
     private Activity fatherActivity;
@@ -194,6 +194,25 @@ public class MyWebViewClient extends WebViewClient {
         }
     }
 
+    @Override
+    public void notifySuccess() {
+        PrivateKey privateKey = ((MyAppDNIELECTURA) fatherActivity.getApplicationContext()).get_privateKey();
+        X509Certificate[] certifcateChain = ((MyAppDNIELECTURA) fatherActivity.getApplicationContext()).get_certificateChain();
+
+        if (privateKey != null) {
+            request.proceed(privateKey, certifcateChain);
+        }
+        else {
+            Log.d(TAG, "onChosenCertForClientCertRequest - error retriving private key");
+        }
+
+    }
+
+    @Override
+    public void notifyError() {
+
+    }
+
     public void onDNIeSelection () {
 
         Log.d(TAG,"onDNIeSelection started");
@@ -203,15 +222,13 @@ public class MyWebViewClient extends WebViewClient {
         fatherActivity.startActivityForResult(intent, DisplayURLActivity.REQ_DNIE_READ);
         */
 
-        PrivateKey privateKey = ((SampleActivity_2)fatherActivity).get_privateKey();
-        X509Certificate[] certifcateChain = ((SampleActivity_2)fatherActivity).get_certificateChain();
+        // TODO: Hacer aquí la lectura del DNIe
+        SampleActivity_2 s2 = (SampleActivity_2)fatherActivity;
+        Intent intent = new Intent(s2,  DNIeCanSelection.class);
 
-        if (privateKey != null) {
-            request.proceed(privateKey, certifcateChain);
-        }
-        else {
-            Log.d(TAG, "onChosenCertForClientCertRequest - error retriving private key");
-        }
+        s2.makeSubContainerVisible();
+        s2.startActivityForResult(intent, 1);
+
 
         /*
         PrivateKey privateKey = null;
