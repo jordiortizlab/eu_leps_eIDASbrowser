@@ -7,12 +7,13 @@
 
 	<ImageView
 		android:id="@+id/bannerdgp"
-		android:contentDescription="@string/str_logo_desc"
-		android:src="@drawable/banner_dgp_red"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
+		android:adjustViewBounds="true"
+		android:contentDescription="@string/str_logo_desc"
 		android:scaleType="centerCrop"
-		android:adjustViewBounds="true"/>
+		android:src="@drawable/banner_dgp_red"
+		android:visibility="gone" />
 
 	<LinearLayout
 		android:layout_width="fill_parent"
