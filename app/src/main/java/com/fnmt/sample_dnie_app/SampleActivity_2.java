@@ -33,7 +33,6 @@ public class SampleActivity_2 extends Activity {
 
     String _SSLresultado = "";
 
-    TextView baseInfo = null;
     TextView resultInfo = null;
     private Button startBrowsingButton = null;
     private ImageButton elta1Button = null;
@@ -52,7 +51,6 @@ public class SampleActivity_2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_activity);
 
-        baseInfo = (TextView) this.findViewById(R.id.base_info);
         resultInfo = (TextView) this.findViewById(R.id.result_info);
         startBrowsingButton = (Button) findViewById(R.id.browser_button);
         urlTextView = (TextView) findViewById(R.id.urlTextView);
