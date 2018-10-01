@@ -42,6 +42,7 @@ public class SampleActivity_2 extends Activity {
     LinearLayout fragmentContainerLL = null;
     LinearLayout buttonContainerLL = null;
     LinearLayout webViewContainerLL = null;
+    LinearLayout eltaServicesLayout = null;
 
     public static final int RESULT_DNIeOK = 1;
     public static final int RESULT_DNIeNOK = 2;
@@ -59,9 +60,12 @@ public class SampleActivity_2 extends Activity {
         fragmentContainerLL = (LinearLayout) findViewById(R.id.fragment_container);
         buttonContainerLL = (LinearLayout) findViewById(R.id.buttonsLayout);
         webViewContainerLL = (LinearLayout) findViewById(R.id.webviewlayout);
+        eltaServicesLayout = (LinearLayout) findViewById(R.id.eltaServicesLayout);
+        eltaServicesLayout.setVisibility(GONE);
 
         elta1Button = (ImageButton) findViewById(R.id.elta1ImageButton);
 
+        addEltaServices();
 
         hideWebView();
         hideFragmentBar(); // TODO: We shall remove the FragmentLayout. Now it is of no use
@@ -92,7 +96,7 @@ public class SampleActivity_2 extends Activity {
         elta1Button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                urlTextView.setText(getResources().getString(R.string.Elta1Service));
+                eltaServicesLayout.setVisibility(VISIBLE);
             }
         });
 
@@ -100,6 +104,24 @@ public class SampleActivity_2 extends Activity {
 
     }
 
+    private void addEltaServices(){
+        String[] eltaServices = getResources().getStringArray(R.array.EltaServices);
+        String[] eltaServiceNames = getResources().getStringArray(R.array.EltaServicesNames);
+        int position = 0;
+
+        for(final String s : eltaServices) {
+            Button serviceButton = new Button(this);
+            serviceButton.setText(eltaServiceNames[position]);
+            eltaServicesLayout.addView(serviceButton);
+            serviceButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    urlTextView.setText(s);
+                }
+            });
+            position++;
+        }
+    }
 
     private void modifyLinearLayoutWeight(LinearLayout ll, float weight) {
         LinearLayout.LayoutParams actualp = (LinearLayout.LayoutParams) ll.getLayoutParams();

@@ -44,24 +44,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ImageButton
-            android:id="@+id/elta1ImageButton"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/elta" />
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/athexlogo" />
-
         <Button
             android:id="@+id/browser_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Browsing" />
+
+        <LinearLayout
+            android:id="@+id/servicesLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/elta1ImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/elta" />
+
+            <LinearLayout
+                android:id="@+id/eltaServicesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"></LinearLayout>
+
+            <ImageButton
+                android:id="@+id/athex1imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/athexlogo" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

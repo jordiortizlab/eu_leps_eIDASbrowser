@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Elta1Service">http://www.elta.gr/en-us/business/eshop.aspx</string>
+    <string-array name="EltaServicesNames">
+        <item name="Elta1Service">e-Shopping</item>
+        <item name="Elta2Service">Home</item>
+    </string-array>
+
+    <string-array name="EltaServices">
+        <item name="Elta1Service">http://www.elta.gr/en-us/business/eshop.aspx</item>
+        <item name="Elta2Service">http://www.elta.gr/en-us/home.aspx</item>
+    </string-array>
 </resources>
