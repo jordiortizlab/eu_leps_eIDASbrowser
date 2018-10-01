@@ -6,8 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,10 +36,12 @@ public class SampleActivity_2 extends Activity {
     TextView baseInfo = null;
     TextView resultInfo = null;
     private Button startBrowsingButton = null;
+    private ImageButton elta1Button = null;
     TextView urlTextView = null;
     LinearLayout subContainerLL = null;
     LinearLayout fragmentContainerLL = null;
     LinearLayout buttonContainerLL = null;
+    LinearLayout webViewContainerLL = null;
 
     public static final int RESULT_DNIeOK = 1;
     public static final int RESULT_DNIeNOK = 2;
@@ -54,9 +58,16 @@ public class SampleActivity_2 extends Activity {
         subContainerLL = (LinearLayout) findViewById(R.id.sub_container);
         fragmentContainerLL = (LinearLayout) findViewById(R.id.fragment_container);
         buttonContainerLL = (LinearLayout) findViewById(R.id.buttonsLayout);
+        webViewContainerLL = (LinearLayout) findViewById(R.id.webviewlayout);
+
+        elta1Button = (ImageButton) findViewById(R.id.elta1ImageButton);
+
+
+        hideWebView();
+        hideFragmentBar(); // TODO: We shall remove the FragmentLayout. Now it is of no use
+        showSubContainer();
 
         urlTextView.setText("http://lab9054.inv.uji.es/~paco/clave/");
-
 
         NFCCommunicationFragment.setTextColor(Color.WHITE);
         NetworkCommunicationFragment.setTextColor(Color.WHITE);
@@ -66,8 +77,7 @@ public class SampleActivity_2 extends Activity {
         startBrowsingButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentContainerLL.setVisibility(View.GONE);
-                buttonContainerLL.setVisibility(View.GONE);
+                showWebView();
 
                 CANSpecDO can = ((MyAppDNIELECTURA) getApplicationContext()).getCAN();
                 CANSpecDOStore store = new CANSpecDOStore(SampleActivity_2.this);
@@ -79,22 +89,58 @@ public class SampleActivity_2 extends Activity {
             }
         });
 
-        setCan.setOnClickListener(new OnClickListener() {
+        elta1Button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SampleActivity_2.this, DNIeCanSelection.class);
-                startActivityForResult(intent, 1);
+                urlTextView.setText(getResources().getString(R.string.Elta1Service));
             }
         });
 
+
+
     }
 
-    void makeSubContainerVisible() {
+
+    private void modifyLinearLayoutWeight(LinearLayout ll, float weight) {
+        LinearLayout.LayoutParams actualp = (LinearLayout.LayoutParams) ll.getLayoutParams();
+        actualp.weight = weight;
+        ll.setLayoutParams(actualp);
+    }
+
+    void showSubContainer() {
+        modifyLinearLayoutWeight(subContainerLL, 1.0F);
         subContainerLL.setVisibility(VISIBLE);
     }
 
-    void makeSubContainerInVisible() {
+    void hideSubContainer() {
+        modifyLinearLayoutWeight(subContainerLL, 0);
         subContainerLL.setVisibility(GONE);
+    }
+
+    void hideWebView() {
+        modifyLinearLayoutWeight(subContainerLL, 0);
+        webViewContainerLL.setVisibility(GONE);
+    }
+
+    void showWebView() {
+        modifyLinearLayoutWeight(subContainerLL, 1.0F);
+        webViewContainerLL.setVisibility(VISIBLE);
+        hideButtonBar();
+        hideFragmentBar();
+    }
+
+    void hideButtonBar() {
+        buttonContainerLL.setVisibility(View.GONE);
+
+    }
+
+    void hideFragmentBar() {
+        fragmentContainerLL.setVisibility(View.GONE);
+
+    }
+
+    void showButtonBar() {
+        buttonContainerLL.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -102,7 +148,7 @@ public class SampleActivity_2 extends Activity {
         switch(resultCode) {
             case RESULT_DNIeOK:
                 Log.d(TAG, "DNIe Result OK, resuming browser");
-                makeSubContainerVisible();
+                showSubContainer();
                 MyWebViewClient webViewClient = ((MyAppDNIELECTURA) getApplicationContext()).getWebViewClient();
                 webViewClient.notifySuccess();
                 break;
@@ -136,7 +182,8 @@ public class SampleActivity_2 extends Activity {
 
         webView.setWebViewClient(myWebViewClient);
 
-        webView.loadUrl("http://lab9054.inv.uji.es/~paco/clave/");
+//        webView.loadUrl("http://lab9054.inv.uji.es/~paco/clave/");
+        webView.loadUrl(urlTextView.getText().toString());
         Log.d(TAG, "Fixed: http://lab9054.inv.uji.es/~paco/clave/");
 
     }

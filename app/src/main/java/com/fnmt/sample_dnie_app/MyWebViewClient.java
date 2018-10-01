@@ -209,7 +209,7 @@ public class MyWebViewClient extends WebViewClient implements IDNIeEventsCallbac
         SampleActivity_2 s2 = (SampleActivity_2)fatherActivity;
         Intent intent = new Intent(s2,  DNIeCanSelection.class);
 
-        s2.makeSubContainerVisible();
+        s2.showSubContainer();
         s2.startActivityForResult(intent, 1);
     }
 
