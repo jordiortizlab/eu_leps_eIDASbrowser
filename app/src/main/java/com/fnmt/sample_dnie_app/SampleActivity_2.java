@@ -1,57 +1,26 @@
 package com.fnmt.sample_dnie_app;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.X509Certificate;
 
 import de.tsenger.androsmex.data.CANSpecDO;
 import de.tsenger.androsmex.data.CANSpecDOStore;
-import de.tsenger.androsmex.mrtd.DG1_Dnie;
-import de.tsenger.androsmex.mrtd.EF_COM;
-import es.gob.fnmt.gui.PasswordUI;
-import es.gob.fnmt.gui.ProgressDialogUI;
-import es.gob.fnmt.gui.SignatureNotification;
 import es.gob.fnmt.gui.fragment.NFCCommunicationFragment;
 import es.gob.fnmt.gui.fragment.NetworkCommunicationFragment;
 import es.gob.fnmt.net.DroidHttpClient;
-import es.gob.fnmt.nfc.NFCCommReaderFragment;
-import es.gob.fnmt.policy.KeyManagerPolicy;
-import es.gob.jmulticard.jse.provider.DnieKeyStore;
 
 import static android.view.View.GONE;
 import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
 
-import com.fnmt.sample_dnie_app.R;
 
 public class SampleActivity_2 extends Activity {
     private static final String TAG = SampleActivity_2.class.getSimpleName();
