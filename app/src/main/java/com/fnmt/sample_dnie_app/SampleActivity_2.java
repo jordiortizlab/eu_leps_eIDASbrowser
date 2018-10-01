@@ -75,6 +75,9 @@ public class SampleActivity_2 extends Activity {
     LinearLayout fragmentContainerLL = null;
     LinearLayout buttonContainerLL = null;
 
+    public static final int RESULT_DNIeOK = 1;
+    public static final int RESULT_DNIeNOK = 2;
+
 //    public PrivateKey get_privateKey() {
 //        return _privateKey;
 //    }
@@ -195,6 +198,23 @@ public class SampleActivity_2 extends Activity {
 
     void makeSubContainerInVisible() {
         subContainerLL.setVisibility(GONE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(resultCode) {
+            case RESULT_DNIeOK:
+                Log.d(TAG, "DNIe Result OK, resuming browser");
+                makeSubContainerVisible();
+                MyWebViewClient webViewClient = ((MyAppDNIELECTURA) getApplicationContext()).getWebViewClient();
+                webViewClient.notifySuccess();
+                break;
+            case RESULT_DNIeNOK:
+                Log.d(TAG, "DNIe Result NOK, Rise Alert!!");
+                break;
+            default:
+                break;
+        }
     }
 
     void LoadBrowser() {

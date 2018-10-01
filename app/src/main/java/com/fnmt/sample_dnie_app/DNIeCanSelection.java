@@ -42,6 +42,9 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 	private static final int REQ_EDIT_NEW_CAN 	= 1;
 	private static final int REQ_EDIT_CAN 		= 2;
 	private static final int REQ_READ_PP 		= 3;
+	public static final int DNIeReadOK         = 4;
+	public static final int DNIeReadNOK        = 5;
+
 	private Button readNewW;
 	private ListView listW;
 
@@ -166,7 +169,16 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 				toastIt("error");
 			}
 		}
-	}
+		if ( resultCode == DNIeReadOK) {
+		    setResult(SampleActivity_2.RESULT_DNIeOK);
+		    finish();
+        }
+        else if ( resultCode == DNIeReadNOK) {
+            setResult(SampleActivity_2.RESULT_DNIeNOK);
+            finish();
+        }
+
+    }
 	
 	@Override
 	public void onClick(View v) {

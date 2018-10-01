@@ -84,16 +84,16 @@ public class MyWebViewClient extends WebViewClient implements IDNIeEventsCallbac
     }
 
     @Override
-    public void onReceivedClientCertRequest(WebView view, ClientCertRequest request) {
+    public void onReceivedClientCertRequest(WebView view, final ClientCertRequest request) {
 
         Log.d(TAG, "onReceivedClientCertRequest");
 
         this.view = view;
         this.request = request;
 
-        Log.d (TAG, "onReceivedClientCertRequest - default: " +request.toString());
-        Log.d (TAG, "onReceivedClientCertRequest - host: " +request.getHost());
-        Log.d (TAG, "onReceivedClientCertRequest - port: " +request.getPort());
+        Log.d (TAG, "onReceivedClientCertRequest - default: " + request.toString());
+        Log.d (TAG, "onReceivedClientCertRequest - host: " + request.getHost());
+        Log.d (TAG, "onReceivedClientCertRequest - port: " + request.getPort());
         //Log.d (TAG, "onReceivedClientCertRequest - keyTypes: " +request.getKeyTypes().toString());
         //Log.d (TAG, "onReceivedClientCertRequest - principals: " +request.getPrincipals().toString());
 
@@ -193,6 +193,7 @@ public class MyWebViewClient extends WebViewClient implements IDNIeEventsCallbac
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void notifySuccess() {

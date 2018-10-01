@@ -93,8 +93,8 @@ public class ReadCrypto extends Activity implements NFCCommReaderFragment.NFCCom
                 break;
             case SIGNATURE_DONE:
                 message = "Firma realizada, puede retirar el DNIe. Continuando con descarga de datos...";
-                IDNIeEventsCallback webViewClient = ((MyAppDNIELECTURA) getApplicationContext()).getWebViewClient();
-                webViewClient.notifySuccess();
+//                IDNIeEventsCallback webViewClient = ((MyAppDNIELECTURA) getApplicationContext()).getWebViewClient();
+//                webViewClient.notifySuccess();
                 break;
             default:
                 message = null;
@@ -125,46 +125,13 @@ public class ReadCrypto extends Activity implements NFCCommReaderFragment.NFCCom
 
     @Override
     public void netConnDone(boolean error) {
-        try {
-            if(!error) {
-//                alert.setTitle("Tu seguridad social");
-
-                //WebView webView = new WebView(SampleActivity_2.this);
-                WebView webView = (WebView) findViewById(R.id.webViewURL);
-                webView.setInitialScale(1);
-                webView.getSettings().setSupportZoom(true);
-                webView.getSettings().setBuiltInZoomControls(true);
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setUseWideViewPort(true);
-
-                webView.getSettings().setAllowContentAccess(true);
-                webView.getSettings().setAllowFileAccess(true);
-                webView.getSettings().setAllowFileAccessFromFileURLs(true);
-                webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-                webView.loadData(_SSLresultado, "text/html; charset=utf-8","utf-8");
-
-                MyWebViewClient myWebViewClient = new MyWebViewClient(this, getApplicationContext());
-                // The webViewClient has saved the navigation context, so we can recoved later
-                Log.d(TAG, "mywebview aux: "+ myWebViewClient);
+        Log.d(TAG, "netConnDone(" + error + ")");
+        Intent intent = new Intent(ReadCrypto.this, SampleActivity_2.class);
+        setResult(DNIeCanSelection.DNIeReadOK);
+        finish();
+        //startActivityForResult(intent, SampleActivity_2.RESULT_DNIeOK);
 
 
-                webView.setWebViewClient(myWebViewClient);
-                //webView.setWebChromeClient(new WebChromeClient());
-
-                webView.loadUrl("http://lab9054.inv.uji.es/~paco/clave/");
-                Log.d(TAG, "Fixed: http://lab9054.inv.uji.es/~paco/clave/");
-                //alert.setView(webView);
-            }
-            else{
-                Log.d(TAG, "Imposible pedir información");
-//                alert.setTitle("Error en comunicaciones");
-//                alert.setTitle("Se ha producido un error en la petición de información.");
-            }
-        }catch (Exception e){
-//            alert.setTitle("Error en aplicación:");
-//            alert.setTitle("Se ha generado una excepción:"+e.getMessage());
-            Log.d(TAG, "Exception NetConnDone" + e.getMessage());
-        }
     }
 
     @Override
@@ -257,7 +224,7 @@ public class ReadCrypto extends Activity implements NFCCommReaderFragment.NFCCom
                 _networkFragment.setDialog(_myNetProgressDialog,false);
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, _networkFragment);
+                transaction.replace(R.id.fragmentFrameLayout, _networkFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 Log.d(TAG, "NFC_TASK_FINISHED Transaction commit");
@@ -265,14 +232,16 @@ public class ReadCrypto extends Activity implements NFCCommReaderFragment.NFCCom
                 ((MyAppDNIELECTURA) getApplicationContext()).set_certificateChain(_certificateChain);
                 ((MyAppDNIELECTURA) getApplicationContext()).set_privateKey(_privateKey);
 //                // Give back control to the WebviewClient to continue browsing
-                IDNIeEventsCallback webViewClient = ((MyAppDNIELECTURA) getApplicationContext()).getWebViewClient();
-                webViewClient.notifySuccess();
-//                Intent intent = new Intent(getParent(), SampleActivity_2.class);
-//                startActivityForResult(intent, 1);
+//                IDNIeEventsCallback webViewClient = ((MyAppDNIELECTURA) getApplicationContext()).getWebViewClient();
+//                webViewClient.notifySuccess();
+//                Intent intent = new Intent(ReadCrypto.this, SampleActivity_2.class);
+//                startActivityForResult(intent, SampleActivity_2.RESULT_DNIeOK);
 
             }else{
 //                resultInfo.setText(msg);
                 Log.d(TAG, msg);
+//                Intent intent = new Intent(ReadCrypto.this, SampleActivity_2.class);
+//                startActivityForResult(intent, SampleActivity_2.RESULT_DNIeNOK);
             }
         }
 

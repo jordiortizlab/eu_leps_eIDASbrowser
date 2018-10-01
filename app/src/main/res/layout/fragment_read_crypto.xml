@@ -8,12 +8,13 @@
     android:orientation="vertical"
     tools:context=".ReadCryptoFragment">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/fragmentFrameLayout"
         android:layout_width="368dp"
         android:layout_height="526dp"
+        android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-    </FrameLayout>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
