@@ -11,7 +11,6 @@ import android.os.Build;
 import android.security.KeyChain;
 import android.security.KeyChainAliasCallback;
 import android.security.KeyChainException;
-//import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.webkit.ClientCertRequest;
 import android.webkit.SslErrorHandler;
@@ -59,16 +58,6 @@ public class MyWebViewClient extends WebViewClient implements IDNIeEventsCallbac
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
         Log.d(TAG, "shouldOverrideUrlLoading " + request.getUrl());
-
-
-        /*if(request.getUrl().getHost().endsWith("idp.testshib.org")) {
-            return false;
-        }
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
-        view.getContext().startActivity(intent);
-        return true;
-*/
         return false;
     }
 
@@ -217,41 +206,11 @@ public class MyWebViewClient extends WebViewClient implements IDNIeEventsCallbac
     public void onDNIeSelection () {
 
         Log.d(TAG,"onDNIeSelection started");
-
-        /*((eIDASBrowserApp)fatherActivity.getApplicationContext()).setStarted(true);
-        Intent intent = new Intent(fatherActivity, DNIeCanSelection.class);
-        fatherActivity.startActivityForResult(intent, DisplayURLActivity.REQ_DNIE_READ);
-        */
-
-        // TODO: Hacer aquí la lectura del DNIe
         SampleActivity_2 s2 = (SampleActivity_2)fatherActivity;
         Intent intent = new Intent(s2,  DNIeCanSelection.class);
 
         s2.makeSubContainerVisible();
         s2.startActivityForResult(intent, 1);
-
-
-        /*
-        PrivateKey privateKey = null;
-        try {
-            privateKey = KeyChain.getPrivateKey(appContext, savedAlias);
-
-            X509Certificate[] certifcateChain = KeyChain.getCertificateChain(appContext, savedAlias);
-            Log.d(TAG, "onChosenCertForClientCertRequest - public certs");
-
-            if (privateKey != null) {
-                request.proceed(privateKey, certifcateChain);
-            }
-            else {
-                Log.d(TAG, "onChosenCertForClientCertRequest - error retriving private key");
-            }
-        } catch (KeyChainException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
-
     }
 
     public void onReceivedError(WebView view, int errorCode,
