@@ -64,7 +64,6 @@ public class SampleActivity_2 extends Activity {
 
     TextView baseInfo = null;
     TextView resultInfo = null;
-    private Button setCan = null;
     private Button startBrowsingButton = null;
     TextView urlTextView = null;
     LinearLayout subContainerLL = null;
@@ -81,7 +80,6 @@ public class SampleActivity_2 extends Activity {
 
         baseInfo = (TextView) this.findViewById(R.id.base_info);
         resultInfo = (TextView) this.findViewById(R.id.result_info);
-        setCan = (Button) findViewById(R.id.can_button);
         startBrowsingButton = (Button) findViewById(R.id.browser_button);
         urlTextView = (TextView) findViewById(R.id.urlTextView);
         subContainerLL = (LinearLayout) findViewById(R.id.sub_container);
@@ -90,7 +88,6 @@ public class SampleActivity_2 extends Activity {
 
         urlTextView.setText("http://lab9054.inv.uji.es/~paco/clave/");
 
-        setCan.setVisibility(VISIBLE);
 
         NFCCommunicationFragment.setTextColor(Color.WHITE);
         NetworkCommunicationFragment.setTextColor(Color.WHITE);

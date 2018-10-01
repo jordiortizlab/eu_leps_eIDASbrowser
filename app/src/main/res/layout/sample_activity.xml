@@ -37,20 +37,6 @@
             android:textSize="18sp"
             android:visibility="gone" />
 
-        <Button
-            android:id="@+id/can_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="@drawable/button_shape"
-            android:clickable="true"
-            android:padding="5dp"
-            android:text="Establecer can"
-            android:textColor="@color/PureWhite"
-            android:textSize="18sp"
-            android:visibility="gone" />
-
         <TextView
             android:id="@+id/urlTextView"
             android:layout_width="match_parent"
