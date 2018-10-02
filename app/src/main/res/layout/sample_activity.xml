@@ -36,7 +36,11 @@
             android:id="@+id/browser_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Browsing" />
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Start Browsing"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large.Inverse"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/servicesLayout"
@@ -44,11 +48,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Service URL Selection hooks:"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+
             <ImageButton
                 android:id="@+id/elta1ImageButton"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:scaleType="centerCrop"
+                android:layout_height="98dp"
+                android:scaleType="centerInside"
                 android:src="@drawable/elta" />
 
             <LinearLayout
@@ -61,7 +72,7 @@
             <ImageButton
                 android:id="@+id/athex1imageButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="98dp"
                 android:src="@drawable/athexlogo" />
 
             <LinearLayout
@@ -75,7 +86,7 @@
             <ImageButton
                 android:id="@+id/correosImageButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="98dp"
                 android:src="@drawable/correoslogo" />
             <LinearLayout
                 android:id="@+id/correosServicesLayout"
