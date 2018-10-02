@@ -42,60 +42,66 @@
             android:textColor="@android:color/holo_blue_dark"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/servicesLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Service URL Selection hooks:"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="Service URL Selection hooks:"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
-
-            <ImageButton
-                android:id="@+id/elta1ImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="98dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/elta" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/eltaServicesLayout"
+                android:id="@+id/servicesLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible"></LinearLayout>
-
-            <ImageButton
-                android:id="@+id/athex1imageButton"
-                android:layout_width="match_parent"
-                android:layout_height="98dp"
-                android:src="@drawable/athexlogo" />
-
-            <LinearLayout
-                android:id="@+id/athexServicesLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-            </LinearLayout>
+                <ImageButton
+                    android:id="@+id/elta1ImageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/elta" />
 
-            <ImageButton
-                android:id="@+id/correosImageButton"
-                android:layout_width="match_parent"
-                android:layout_height="98dp"
-                android:src="@drawable/correoslogo" />
-            <LinearLayout
-                android:id="@+id/correosServicesLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/eltaServicesLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible"></LinearLayout>
 
+                <ImageButton
+                    android:id="@+id/athex1imageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:src="@drawable/athexlogo" />
+
+                <LinearLayout
+                    android:id="@+id/athexServicesLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/correosImageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:src="@drawable/correoslogo" />
+
+                <LinearLayout
+                    android:id="@+id/correosServicesLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 
