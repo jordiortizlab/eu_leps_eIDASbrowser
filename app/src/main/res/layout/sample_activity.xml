@@ -63,6 +63,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/athexlogo" />
+
+            <LinearLayout
+                android:id="@+id/athexServicesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/correosImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/correoslogo" />
+            <LinearLayout
+                android:id="@+id/correosServicesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

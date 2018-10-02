@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -35,13 +35,17 @@ public class SampleActivity_2 extends Activity {
 
     TextView resultInfo = null;
     private Button startBrowsingButton = null;
-    private ImageButton elta1Button = null;
+    private ImageButton eltaButton = null;
+    private ImageButton athexButton = null;
+    private ImageButton correosButton = null;
     TextView urlTextView = null;
     LinearLayout subContainerLL = null;
     LinearLayout fragmentContainerLL = null;
     LinearLayout buttonContainerLL = null;
     LinearLayout webViewContainerLL = null;
     LinearLayout eltaServicesLayout = null;
+    LinearLayout athexServicesLayout = null;
+    LinearLayout correosServicesLayout = null;
 
     public static final int RESULT_DNIeOK = 1;
     public static final int RESULT_DNIeNOK = 2;
@@ -60,10 +64,17 @@ public class SampleActivity_2 extends Activity {
         webViewContainerLL = (LinearLayout) findViewById(R.id.webviewlayout);
         eltaServicesLayout = (LinearLayout) findViewById(R.id.eltaServicesLayout);
         eltaServicesLayout.setVisibility(GONE);
+        athexServicesLayout = (LinearLayout) findViewById(R.id.athexServicesLayout);
+        athexServicesLayout.setVisibility(GONE);
+        correosServicesLayout = (LinearLayout) findViewById(R.id.correosServicesLayout);
+        correosServicesLayout.setVisibility(GONE);
+        eltaButton = (ImageButton) findViewById(R.id.elta1ImageButton);
+        athexButton = (ImageButton) findViewById(R.id.athex1imageButton);
+        correosButton = (ImageButton) findViewById(R.id.correosImageButton);
 
-        elta1Button = (ImageButton) findViewById(R.id.elta1ImageButton);
-
-        addEltaServices();
+        addServices(R.array.EltaServices, R.array.EltaServicesNames, eltaServicesLayout);
+        addServices(R.array.AthexServices, R.array.AthexServicesNames, athexServicesLayout);
+        addServices(R.array.CorreosServices, R.array.CorreosServicesNames, correosServicesLayout);
 
         hideWebView();
         hideFragmentBar(); // TODO: We shall remove the FragmentLayout. Now it is of no use
@@ -91,10 +102,45 @@ public class SampleActivity_2 extends Activity {
             }
         });
 
-        elta1Button.setOnClickListener(new OnClickListener() {
+        eltaButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                eltaServicesLayout.setVisibility(VISIBLE);
+                switch(eltaServicesLayout.getVisibility()) {
+                    case VISIBLE:
+                        eltaServicesLayout.setVisibility(GONE);
+                        break;
+                    default:
+                        eltaServicesLayout.setVisibility(VISIBLE);
+                        break;
+                }
+            }
+        });
+
+        athexButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(athexServicesLayout.getVisibility()) {
+                    case VISIBLE:
+                        athexServicesLayout.setVisibility(GONE);
+                        break;
+                    default:
+                        athexServicesLayout.setVisibility(VISIBLE);
+                        break;
+                }
+            }
+        });
+
+        correosButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(correosServicesLayout.getVisibility()) {
+                    case VISIBLE:
+                        correosServicesLayout.setVisibility(GONE);
+                        break;
+                    default:
+                        correosServicesLayout.setVisibility(VISIBLE);
+                        break;
+                }
             }
         });
 
@@ -102,15 +148,15 @@ public class SampleActivity_2 extends Activity {
 
     }
 
-    private void addEltaServices(){
-        String[] eltaServices = getResources().getStringArray(R.array.EltaServices);
-        String[] eltaServiceNames = getResources().getStringArray(R.array.EltaServicesNames);
+    private void addServices(int services, int servicesnames, LinearLayout destinationLayout){
+        String[] servicesUrls = getResources().getStringArray(services);
+        String[] servicesNames = getResources().getStringArray(servicesnames);
         int position = 0;
 
-        for(final String s : eltaServices) {
+        for(final String s : servicesUrls) {
             Button serviceButton = new Button(this);
-            serviceButton.setText(eltaServiceNames[position]);
-            eltaServicesLayout.addView(serviceButton);
+            serviceButton.setText(servicesNames[position]);
+            destinationLayout.addView(serviceButton);
             serviceButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
