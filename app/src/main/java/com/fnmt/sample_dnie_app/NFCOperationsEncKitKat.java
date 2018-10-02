@@ -232,7 +232,8 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
             // Pasamos los datos a la activity correspondiente
             Intent myResultIntent = new Intent(NFCOperationsEncKitKat.this, DNIeCanSelection.class);
             myResultIntent.putExtras(b);
-            startActivityForResult(myResultIntent, 1);
+            setResult(DNIeCanSelection.DNIeCANOK, myResultIntent);
+            finish();
         }
     }
 

@@ -44,6 +44,7 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 	private static final int REQ_READ_PP 		= 3;
 	public static final int DNIeReadOK         = 4;
 	public static final int DNIeReadNOK        = 5;
+    public static final int DNIeCANOK           =6;
 
 	private Button readNewW;
 	private ListView listW;
@@ -131,7 +132,7 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		setIntent(data);
-		
+
 		if( requestCode == REQ_EDIT_NEW_CAN )
 		{
 			if( resultCode == RESULT_OK )
@@ -148,7 +149,7 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 			{
 				CANSpecDO can = data.getExtras().getParcelable( CANSpecDO.EXTRA_CAN );
 				cans.save(can);
-				refreshAdapter();
+
 			}
 		}
 		else if( requestCode == REQ_READ_PP )
@@ -168,6 +169,10 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 			{
 				toastIt("error");
 			}
+		}
+		if (resultCode == DNIeCANOK) {
+            // The CAN has been associated successfully. Refresh the canLIST
+            refreshAdapter();
 		}
 		if ( resultCode == DNIeReadOK) {
 		    setResult(SampleActivity_2.RESULT_DNIeOK);
