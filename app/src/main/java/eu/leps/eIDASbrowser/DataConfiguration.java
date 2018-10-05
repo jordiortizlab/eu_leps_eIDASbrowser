@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,7 +37,7 @@ public class DataConfiguration extends Activity {
 
         // Quitamos la barra del título
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.data_configuration);
+        setContentView(eu.leps.eIDASbrowser.R.layout.data_configuration);
 
         myContext = DataConfiguration.this;
 
@@ -46,15 +46,15 @@ public class DataConfiguration extends Activity {
 
         // Ajustamos el tipo de letra
         Typeface typeFace = Typeface.createFromAsset(myContext.getAssets(), "fonts/HelveticaNeue.ttf");
-        ((TextView)findViewById(R.id.configuration_description)).setTypeface(typeFace);
-        ((CheckBox)findViewById(R.id.checkBoxDG1)).setTypeface(typeFace);
-        ((CheckBox)findViewById(R.id.checkBoxDG2)).setTypeface(typeFace);
-        ((CheckBox)findViewById(R.id.checkBoxDG7)).setTypeface(typeFace);
-        ((CheckBox)findViewById(R.id.checkBoxDG11)).setTypeface(typeFace);
+        ((TextView)findViewById(eu.leps.eIDASbrowser.R.id.configuration_description)).setTypeface(typeFace);
+        ((CheckBox)findViewById(eu.leps.eIDASbrowser.R.id.checkBoxDG1)).setTypeface(typeFace);
+        ((CheckBox)findViewById(eu.leps.eIDASbrowser.R.id.checkBoxDG2)).setTypeface(typeFace);
+        ((CheckBox)findViewById(eu.leps.eIDASbrowser.R.id.checkBoxDG7)).setTypeface(typeFace);
+        ((CheckBox)findViewById(eu.leps.eIDASbrowser.R.id.checkBoxDG11)).setTypeface(typeFace);
 
         // Controlamos el cambio en los CheckBox de lectura de DG's.
         // Modificación del check DG1
-        CheckBox checkBox = (CheckBox)findViewById(R.id.checkBoxDG1);
+        CheckBox checkBox = (CheckBox)findViewById(eu.leps.eIDASbrowser.R.id.checkBoxDG1);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked)
@@ -67,7 +67,7 @@ public class DataConfiguration extends Activity {
         });
 
         // Modificación del check DG11
-        checkBox = (CheckBox)findViewById(R.id.checkBoxDG11);
+        checkBox = (CheckBox)findViewById(eu.leps.eIDASbrowser.R.id.checkBoxDG11);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked)
@@ -80,7 +80,7 @@ public class DataConfiguration extends Activity {
         });
 
         // Modificación del check DG2
-        checkBox = (CheckBox)findViewById(R.id.checkBoxDG2);
+        checkBox = (CheckBox)findViewById(eu.leps.eIDASbrowser.R.id.checkBoxDG2);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked)
@@ -93,7 +93,7 @@ public class DataConfiguration extends Activity {
         });
 
         // Modificación del check DG7
-        checkBox = (CheckBox)findViewById(R.id.checkBoxDG7);
+        checkBox = (CheckBox)findViewById(eu.leps.eIDASbrowser.R.id.checkBoxDG7);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked)
@@ -107,7 +107,7 @@ public class DataConfiguration extends Activity {
 
         ///////////////////////////////////////////////////////////////////////////////////
         // Botón de vuelta al Activity anterior
-        Button btnNFCBack = (Button)findViewById(R.id.butDataVolver);
+        Button btnNFCBack = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butDataVolver);
         btnNFCBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -118,7 +118,7 @@ public class DataConfiguration extends Activity {
 
         ///////////////////////////////////////////////////////////////////////////////////
         // Botón de lectura de nuevo documento
-        Button btnLectura = (Button)findViewById(R.id.butDataLeer);
+        Button btnLectura = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butDataLeer);
         btnLectura.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

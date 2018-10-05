@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,26 +20,26 @@ public class DataErrorActivity extends Activity {
 
 		// Quitamos la barra del título
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.data_error);
+		setContentView(eu.leps.eIDASbrowser.R.layout.data_error);
 
 		Context myContext = DataErrorActivity.this;
 
 		// Ajustamos el tipo de letra de textos
 		Typeface typeface = Typeface.createFromAsset(myContext.getAssets(),"fonts/HelveticaNeue.ttf");
-		((TextView)findViewById(R.id.result1)).setTypeface(typeface);
-		((TextView)findViewById(R.id.resultinfo)).setTypeface(typeface);
+		((TextView)findViewById(eu.leps.eIDASbrowser.R.id.result1)).setTypeface(typeface);
+		((TextView)findViewById(eu.leps.eIDASbrowser.R.id.resultinfo)).setTypeface(typeface);
 
 		Bundle extras = getIntent().getExtras();
 		if(extras != null) {
 			// Leemos el código de error que vamos a utilizar
 			mError = extras.getString("ERROR_MSG");
-			TextView tvloc = (TextView) findViewById(R.id.resultinfo);
+			TextView tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.resultinfo);
 			tvloc.setText(mError);
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////
 		// Botón de vuelta al Activity anterior
-		Button btnNFCBack = (Button)findViewById(R.id.butVolver);
+		Button btnNFCBack = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butVolver);
 		btnNFCBack.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 
@@ -51,7 +51,7 @@ public class DataErrorActivity extends Activity {
 
 		///////////////////////////////////////////////////////////////////////////////////
 		// Botón de configuración
-		Button btnLectura = (Button)findViewById(R.id.butConfigurar);
+		Button btnLectura = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butConfigurar);
 		btnLectura.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 

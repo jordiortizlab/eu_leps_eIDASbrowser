@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.fnmt.sample_dnie_app.ReadCrypto">
+    tools:context="com.leps.eIDASbrowser.eu.leps.eIDASbrowser.ReadCrypto">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

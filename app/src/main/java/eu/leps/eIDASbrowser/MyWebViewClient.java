@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -92,20 +92,20 @@ public class MyWebViewClient extends WebViewClient implements IDNIeEventsCallbac
 
     private void createCertSourceSelectorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(fatherActivity);
-        builder.setMessage(R.string.dialog_cert_selector_message)
-                .setTitle(R.string.dialog_cert_selector_title);
+        builder.setMessage(eu.leps.eIDASbrowser.R.string.dialog_cert_selector_message)
+                .setTitle(eu.leps.eIDASbrowser.R.string.dialog_cert_selector_title);
 
-        builder.setPositiveButton(R.string.dialog_cert_selector_softCert, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(eu.leps.eIDASbrowser.R.string.dialog_cert_selector_softCert, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 showAndroidCertSelector();
             }
         });
-        builder.setNegativeButton(R.string.dialog_cert_selector_dnie, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(eu.leps.eIDASbrowser.R.string.dialog_cert_selector_dnie, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 onDNIeSelection();
             }
         });
-        builder.setNeutralButton(R.string.dialog_cert_selector_cancel, new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(eu.leps.eIDASbrowser.R.string.dialog_cert_selector_cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //TODO: User cancelled the dialog
             }

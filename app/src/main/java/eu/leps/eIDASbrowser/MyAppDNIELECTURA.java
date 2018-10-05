@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Application;
 

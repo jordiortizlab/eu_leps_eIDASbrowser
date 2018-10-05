@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -22,7 +22,7 @@ public class DNIeReader extends Activity {
         
         // Quitamos la barra del título
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);  
-        setContentView(R.layout.dnie_00);
+        setContentView(eu.leps.eIDASbrowser.R.layout.dnie_00);
     	    	    	    	             
         // Si no hemos abierto correctamente, salimos
         if(!((MyAppDNIELECTURA)getApplicationContext()).isStarted())
@@ -45,11 +45,11 @@ public class DNIeReader extends Activity {
 
 		// Ajustamos tipo de letra
 		Typeface fontType = Typeface.createFromAsset(DNIeReader.this.getAssets(), "fonts/HelveticaNeue.ttf");
-		((TextView)findViewById(R.id.textoproceso)).setTypeface(fontType);
+		((TextView)findViewById(eu.leps.eIDASbrowser.R.id.textoproceso)).setTypeface(fontType);
 
 		///////////////////////////////////////////////////////////////////////////////////
 		// Botón 1: Volver
-		final Button btnSolicitar = (Button)findViewById(R.id.butVolver);
+		final Button btnSolicitar = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butVolver);
 		btnSolicitar.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) {
@@ -61,7 +61,7 @@ public class DNIeReader extends Activity {
 
 		///////////////////////////////////////////////////////////////////////////////////
 		// Botón 2: Configurar
-		final Button btnConfigurar = (Button)findViewById(R.id.butConfigurar);
+		final Button btnConfigurar = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butConfigurar);
 		btnConfigurar.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View v) {

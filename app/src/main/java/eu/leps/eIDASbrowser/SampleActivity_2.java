@@ -1,10 +1,9 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -57,26 +56,26 @@ public class SampleActivity_2 extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.sample_activity);
 
-        resultInfo = (TextView) this.findViewById(R.id.result_info);
-        startBrowsingButton = (Button) findViewById(R.id.browser_button);
-        urlTextView = (TextView) findViewById(R.id.urlTextView);
-        subContainerLL = (LinearLayout) findViewById(R.id.sub_container);
-        fragmentContainerLL = (LinearLayout) findViewById(R.id.fragment_container);
-        buttonContainerLL = (LinearLayout) findViewById(R.id.buttonsLayout);
-        webViewContainerLL = (LinearLayout) findViewById(R.id.webviewlayout);
-        eltaServicesLayout = (LinearLayout) findViewById(R.id.eltaServicesLayout);
+        resultInfo = (TextView) this.findViewById(eu.leps.eIDASbrowser.R.id.result_info);
+        startBrowsingButton = (Button) findViewById(eu.leps.eIDASbrowser.R.id.browser_button);
+        urlTextView = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.urlTextView);
+        subContainerLL = (LinearLayout) findViewById(eu.leps.eIDASbrowser.R.id.sub_container);
+        fragmentContainerLL = (LinearLayout) findViewById(eu.leps.eIDASbrowser.R.id.fragment_container);
+        buttonContainerLL = (LinearLayout) findViewById(eu.leps.eIDASbrowser.R.id.buttonsLayout);
+        webViewContainerLL = (LinearLayout) findViewById(eu.leps.eIDASbrowser.R.id.webviewlayout);
+        eltaServicesLayout = (LinearLayout) findViewById(eu.leps.eIDASbrowser.R.id.eltaServicesLayout);
         eltaServicesLayout.setVisibility(GONE);
-        athexServicesLayout = (LinearLayout) findViewById(R.id.athexServicesLayout);
+        athexServicesLayout = (LinearLayout) findViewById(eu.leps.eIDASbrowser.R.id.athexServicesLayout);
         athexServicesLayout.setVisibility(GONE);
-        correosServicesLayout = (LinearLayout) findViewById(R.id.correosServicesLayout);
+        correosServicesLayout = (LinearLayout) findViewById(eu.leps.eIDASbrowser.R.id.correosServicesLayout);
         correosServicesLayout.setVisibility(GONE);
-        eltaButton = (ImageButton) findViewById(R.id.elta1ImageButton);
-        athexButton = (ImageButton) findViewById(R.id.athex1imageButton);
-        correosButton = (ImageButton) findViewById(R.id.correosImageButton);
+        eltaButton = (ImageButton) findViewById(eu.leps.eIDASbrowser.R.id.elta1ImageButton);
+        athexButton = (ImageButton) findViewById(eu.leps.eIDASbrowser.R.id.athex1imageButton);
+        correosButton = (ImageButton) findViewById(eu.leps.eIDASbrowser.R.id.correosImageButton);
 
-        addServices(R.array.EltaServices, R.array.EltaServicesNames, eltaServicesLayout);
-        addServices(R.array.AthexServices, R.array.AthexServicesNames, athexServicesLayout);
-        addServices(R.array.CorreosServices, R.array.CorreosServicesNames, correosServicesLayout);
+        addServices(eu.leps.eIDASbrowser.R.array.EltaServices, eu.leps.eIDASbrowser.R.array.EltaServicesNames, eltaServicesLayout);
+        addServices(eu.leps.eIDASbrowser.R.array.AthexServices, eu.leps.eIDASbrowser.R.array.AthexServicesNames, athexServicesLayout);
+        addServices(eu.leps.eIDASbrowser.R.array.CorreosServices, eu.leps.eIDASbrowser.R.array.CorreosServicesNames, correosServicesLayout);
 
         hideWebView();
         hideFragmentBar(); // TODO: We shall remove the FragmentLayout. Now it is of no use
@@ -229,7 +228,7 @@ public class SampleActivity_2 extends Activity {
     }
 
     void LoadBrowser() {
-        WebView webView = (WebView) findViewById(R.id.webViewURL);
+        WebView webView = (WebView) findViewById(eu.leps.eIDASbrowser.R.id.webViewURL);
         webView.setInitialScale(1);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);

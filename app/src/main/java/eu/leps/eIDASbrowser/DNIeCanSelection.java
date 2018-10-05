@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -69,18 +68,18 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
      
         // Quitamos la barra del título
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.can_list);
+        setContentView(eu.leps.eIDASbrowser.R.layout.can_list);
         
         cans = new CANSpecDOStore(this);
         prepareWidgets();
 
 		// Ajustamos tipo de letra
 		fontType = Typeface.createFromAsset(myContext.getAssets(), "fonts/HelveticaNeue.ttf");
-		((TextView)findViewById(R.id.can_TEXT)).setTypeface(fontType);
+		((TextView)findViewById(eu.leps.eIDASbrowser.R.id.can_TEXT)).setTypeface(fontType);
 
         ///////////////////////////////////////////////////////////////////////////////////
         // Botón 1: Volver
-        final Button btnSolicitar = (Button)findViewById(R.id.butVolver);
+        final Button btnSolicitar = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butVolver);
         btnSolicitar.setOnClickListener(new OnClickListener()
         {
             public void onClick(View v) {
@@ -93,7 +92,7 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 
         ///////////////////////////////////////////////////////////////////////////////////
 		// Botón 2: Configuración
-    	Button btnConfig = (Button)findViewById(R.id.butConfigurar);
+    	Button btnConfig = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butConfigurar);
     	btnConfig.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
 
@@ -105,10 +104,10 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
     }
 	
 	private void prepareWidgets() {
-        readNewW = (Button) findViewById(R.id.BtnCAN_NEW);
+        readNewW = (Button) findViewById(eu.leps.eIDASbrowser.R.id.BtnCAN_NEW);
         readNewW.setOnClickListener(this);
         
-        listW = (ListView) findViewById(R.id.canList);
+        listW = (ListView) findViewById(eu.leps.eIDASbrowser.R.id.canList);
         listA = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cans.getAll());
         
         int idx=0;
@@ -190,19 +189,19 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 		if( v == readNewW )
 		{
 			LayoutInflater factory = LayoutInflater.from(myContext);
-            final View canEntryView = factory.inflate(R.layout.can_entry, null);
+            final View canEntryView = factory.inflate(eu.leps.eIDASbrowser.R.layout.can_entry, null);
             ad = new AlertDialog.Builder(myContext).create();
 		    ad.setCancelable(false);
-		    ad.setIcon(R.drawable.alert_dialog_icon);
+		    ad.setIcon(eu.leps.eIDASbrowser.R.drawable.alert_dialog_icon);
 		    ad.setView(canEntryView);
-			ad.setTitle(getString(R.string.title_dlg_newcan));
-		    ad.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.psswd_dialog_ok), new DialogInterface.OnClickListener() {
+			ad.setTitle(getString(eu.leps.eIDASbrowser.R.string.title_dlg_newcan));
+		    ad.setButton(AlertDialog.BUTTON_POSITIVE, getString(eu.leps.eIDASbrowser.R.string.psswd_dialog_ok), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
-					EditText text = (EditText) ad.findViewById(R.id.can_editbox);
+					EditText text = (EditText) ad.findViewById(eu.leps.eIDASbrowser.R.id.can_editbox);
 
 					// Nos aseguramos de que el CAN introducido tiene la longitud correcta
 					if (text.getText().length() != 0x06) {
-						Toast.makeText(myContext, R.string.help_can_len, Toast.LENGTH_LONG).show();
+						Toast.makeText(myContext, eu.leps.eIDASbrowser.R.string.help_can_len, Toast.LENGTH_LONG).show();
 						return;
 					}
 
@@ -213,25 +212,25 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 					read(can);
 				}
 			});
-		    ad.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.psswd_dialog_cancel), new DialogInterface.OnClickListener() {
+		    ad.setButton(AlertDialog.BUTTON_NEGATIVE, getString(eu.leps.eIDASbrowser.R.string.psswd_dialog_cancel), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 
 
 				}
 			});
 
-			Button helpBtn = ((Button)canEntryView.findViewById(R.id.helpButton));
+			Button helpBtn = ((Button)canEntryView.findViewById(eu.leps.eIDASbrowser.R.id.helpButton));
 			helpBtn.setOnClickListener(new OnClickListener() {
 				public void onClick(View view) {
-					Toast.makeText(myContext, R.string.help_can, Toast.LENGTH_LONG).show();
+					Toast.makeText(myContext, eu.leps.eIDASbrowser.R.string.help_can, Toast.LENGTH_LONG).show();
 				}
 			});
 
 			ad.show();
 
 			// Ajustamos textos y tipos de letra
-			((TextView)ad.findViewById(R.id.can_textview)).setTypeface(fontType);
-			((EditText)ad.findViewById(R.id.can_editbox)).setTypeface(fontType);
+			((TextView)ad.findViewById(eu.leps.eIDASbrowser.R.id.can_textview)).setTypeface(fontType);
+			((EditText)ad.findViewById(eu.leps.eIDASbrowser.R.id.can_editbox)).setTypeface(fontType);
 		}
 	}
 
@@ -272,19 +271,19 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 	private void edit(final CANSpecDO b)
 	{
 		LayoutInflater factory = LayoutInflater.from(myContext);
-        final View canEntryView = factory.inflate(R.layout.can_entry, null);
+        final View canEntryView = factory.inflate(eu.leps.eIDASbrowser.R.layout.can_entry, null);
         ad = new AlertDialog.Builder(myContext).create();
 	    ad.setCancelable(false);
-	    ad.setIcon(R.drawable.alert_dialog_icon);
+	    ad.setIcon(eu.leps.eIDASbrowser.R.drawable.alert_dialog_icon);
 	    ad.setView(canEntryView);
-		ad.setTitle(getString(R.string.title_dlg_newcan));
-	    ad.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.psswd_dialog_ok), new DialogInterface.OnClickListener() {
+		ad.setTitle(getString(eu.leps.eIDASbrowser.R.string.title_dlg_newcan));
+	    ad.setButton(AlertDialog.BUTTON_POSITIVE, getString(eu.leps.eIDASbrowser.R.string.psswd_dialog_ok), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				EditText text = (EditText) ad.findViewById(R.id.can_editbox);
+				EditText text = (EditText) ad.findViewById(eu.leps.eIDASbrowser.R.id.can_editbox);
 
 				// Nos aseguramos de que el CAN introducido tiene la longitud correcta
 				if (text.getText().length() != 0x06) {
-					Toast.makeText(myContext, R.string.help_can_len, Toast.LENGTH_SHORT).show();
+					Toast.makeText(myContext, eu.leps.eIDASbrowser.R.string.help_can_len, Toast.LENGTH_SHORT).show();
 					return;
 				}
 
@@ -295,24 +294,24 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 				refreshAdapter();
 			}
 		});
-	    ad.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.psswd_dialog_cancel), new DialogInterface.OnClickListener() {
+	    ad.setButton(AlertDialog.BUTTON_NEGATIVE, getString(eu.leps.eIDASbrowser.R.string.psswd_dialog_cancel), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 
 			}
 		});
 
-		Button helpBtn = ((Button)canEntryView.findViewById(R.id.helpButton));
+		Button helpBtn = ((Button)canEntryView.findViewById(eu.leps.eIDASbrowser.R.id.helpButton));
 		helpBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				Toast.makeText(myContext, R.string.help_can, Toast.LENGTH_LONG).show();
+				Toast.makeText(myContext, eu.leps.eIDASbrowser.R.string.help_can, Toast.LENGTH_LONG).show();
 			}
 		});
 		ad.show();
 
 		// Ajustamos textos y tipos de letra
-		((TextView)ad.findViewById(R.id.can_textview)).setTypeface(fontType);
-		((EditText)ad.findViewById(R.id.can_editbox)).setTypeface(fontType);
-		((EditText)ad.findViewById(R.id.can_editbox)).setText(b.getCanNumber());
+		((TextView)ad.findViewById(eu.leps.eIDASbrowser.R.id.can_textview)).setTypeface(fontType);
+		((EditText)ad.findViewById(eu.leps.eIDASbrowser.R.id.can_editbox)).setTypeface(fontType);
+		((EditText)ad.findViewById(eu.leps.eIDASbrowser.R.id.can_editbox)).setText(b.getCanNumber());
 	}
 	
 	private void toastIt( String msg )
@@ -402,10 +401,10 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 			final MrtdItem ei = items.get(position);
 			if (ei != null)
 			{
-				v = vi.inflate(R.layout.list_mrtd_row, null);
-				final TextView title 	= (TextView)v.findViewById(R.id.row_title);
-				final TextView name 	= (TextView)v.findViewById(R.id.row_name);
-				final TextView nif 		= (TextView)v.findViewById(R.id.row_nif);
+				v = vi.inflate(eu.leps.eIDASbrowser.R.layout.list_mrtd_row, null);
+				final TextView title 	= (TextView)v.findViewById(eu.leps.eIDASbrowser.R.id.row_title);
+				final TextView name 	= (TextView)v.findViewById(eu.leps.eIDASbrowser.R.id.row_name);
+				final TextView nif 		= (TextView)v.findViewById(eu.leps.eIDASbrowser.R.id.row_nif);
 
 				// Ajustamos el tipo de letra
 				if(title != null) {
@@ -421,7 +420,7 @@ public class DNIeCanSelection extends Activity implements OnClickListener, OnIte
 					nif.setTypeface(fontType);
 				}
 					
-		    	Button deleteImageView = (Button)  v.findViewById(R.id.Btn_DESTROYENTRY);
+		    	Button deleteImageView = (Button)  v.findViewById(eu.leps.eIDASbrowser.R.id.Btn_DESTROYENTRY);
 		    	deleteImageView.setOnClickListener(new OnClickListener() {
 		    		public void onClick(View v) {
 		    			RelativeLayout vwParentRow = (RelativeLayout)v.getParent();

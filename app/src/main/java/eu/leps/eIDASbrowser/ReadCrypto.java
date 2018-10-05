@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
-import android.webkit.WebView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -30,9 +29,6 @@ import es.gob.fnmt.nfc.NFCCommReaderFragment;
 import es.gob.fnmt.policy.KeyManagerPolicy;
 import es.gob.jmulticard.jse.provider.DnieKeyStore;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
 public class ReadCrypto extends Activity implements NFCCommReaderFragment.NFCCommReaderFragmentListener, NetworkCommunicationFragment.NetCommFragmentListener, SignatureNotification {
 
     private static final String TAG = ReadCrypto.class.getSimpleName();
@@ -51,7 +47,7 @@ public class ReadCrypto extends Activity implements NFCCommReaderFragment.NFCCom
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_read_crypto);
+        setContentView(eu.leps.eIDASbrowser.R.layout.activity_read_crypto);
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -62,7 +58,7 @@ public class ReadCrypto extends Activity implements NFCCommReaderFragment.NFCCom
         _readerFragment.setArguments(arg);
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentFrameLayout, _readerFragment);
+        transaction.replace(eu.leps.eIDASbrowser.R.id.fragmentFrameLayout, _readerFragment);
         transaction.addToBackStack(null);
         transaction.commit();
         NFCCommReaderFragment.setSignatureNotification(this);
@@ -214,17 +210,17 @@ public class ReadCrypto extends Activity implements NFCCommReaderFragment.NFCCom
                 myProgressDialog.setMax(100);
 
                 _myNetProgressDialog = new ProgressDialogUI.Builder(myProgressDialog)
-                        .contentLayout(R.layout.progress)
-                        .progressBar(R.id.externalProgressRead)
-                        .title(R.id.title)
-                        .description(R.id.messages)
+                        .contentLayout(eu.leps.eIDASbrowser.R.layout.progress)
+                        .progressBar(eu.leps.eIDASbrowser.R.id.externalProgressRead)
+                        .title(eu.leps.eIDASbrowser.R.id.title)
+                        .description(eu.leps.eIDASbrowser.R.id.messages)
                         .build();
 
                 _networkFragment = new NetworkCommunicationFragment();
                 _networkFragment.setDialog(_myNetProgressDialog,false);
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragmentFrameLayout, _networkFragment);
+                transaction.replace(eu.leps.eIDASbrowser.R.id.fragmentFrameLayout, _networkFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 Log.d(TAG, "NFC_TASK_FINISHED Transaction commit");

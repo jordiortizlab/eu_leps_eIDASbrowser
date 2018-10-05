@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 //import com.dnielectura.jj2000.J2kStreamDecoder;
-
-import java.io.ByteArrayInputStream;
 
 import de.tsenger.androsmex.mrtd.DG11;
 import de.tsenger.androsmex.mrtd.DG1_Dnie;
@@ -39,7 +37,7 @@ public class DataResult extends Activity {
 
         // Quitamos la barra del título
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.data_result);
+        setContentView(eu.leps.eIDASbrowser.R.layout.data_result);
 
         // Almacenamos el contexto
         Context myContext = DataResult.this;
@@ -64,22 +62,22 @@ public class DataResult extends Activity {
             // Información del DG1, si la tenemos
             if(m_dg1!=null) {
                 // Nombre
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_01);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_01);
                 tvloc.setText(m_dg1.getName());
                 // Apellidos
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_02);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_02);
                 tvloc.setText(m_dg1.getSurname());
                 // Doc Number
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_03);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_03);
                 tvloc.setText(m_dg1.getDocNumber());
                 // Doc caducity
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_03_caducity);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_03_caducity);
                 tvloc.setText(m_dg1.getDateOfExpiry());
                 // Fecha de nacimiento
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_07);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_07);
                 tvloc.setText(m_dg1.getDateOfBirth());
                 // País de nacimiento
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_09);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_09);
                 tvloc.setText(m_dg1.getNationality().toUpperCase());
             }
 
@@ -87,25 +85,25 @@ public class DataResult extends Activity {
             // Información del DG11, si la tenemos
             if(m_dg11!=null) {
                 // Lugar de nacimiento
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_08);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_08);
                 tvloc.setText(m_dg11.getBirthPlace().replace("<", " (") + ")");
                 // DNIe Number
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_03);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_03);
                 tvloc.setText(m_dg11.getPersonalNumber());
                 // Dirección actual
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_04);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_04);
                 tvloc.setText(m_dg11.getAddress(DG11.ADDR_DIRECCION));
                 // Localidad
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_05);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_05);
                 tvloc.setText(m_dg11.getAddress(DG11.ADDR_LOCALIDAD));
                 // Provincia
-                tvloc = (TextView) findViewById(R.id.CITIZEN_data_tab_06);
+                tvloc = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_06);
                 tvloc.setText(m_dg11.getAddress(DG11.ADDR_PROVINCIA));
             }
 
             ////////////////////////////////////////////////////////////////////////
             // Información del DG2 (foto), si la tenemos
-            ImageView ivFoto = (ImageView) findViewById(R.id.CITIZEN_data_tab_00);
+            ImageView ivFoto = (ImageView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_00);
 //            if(m_dataDG2!=null){
 //                try {
 //                    // Parseo de la foto en formato JPEG-2000
@@ -123,11 +121,11 @@ public class DataResult extends Activity {
 //            if(loadedImage!=null)
 //                ivFoto.setImageBitmap(loadedImage);
 //            else
-              ivFoto.setImageResource(R.drawable.noface);
+              ivFoto.setImageResource(eu.leps.eIDASbrowser.R.drawable.noface);
 //
 //            ////////////////////////////////////////////////////////////////////////
 //            // Información del DG7, si la tenemos
-            ImageView ivFirma = (ImageView) findViewById(R.id.CITIZEN_data_tab_00_FIRMA);
+            ImageView ivFirma = (ImageView) findViewById(eu.leps.eIDASbrowser.R.id.CITIZEN_data_tab_00_FIRMA);
 //            if(m_dataDG7!=null){
 //                try {
 //                    // Parseo de la firma en formato JPEG-2000
@@ -147,11 +145,11 @@ public class DataResult extends Activity {
 //                    ivFirma.setImageBitmap(loadedSignature);
 //                }
 //            }
-            ivFirma.setImageResource(R.drawable.noface);
+            ivFirma.setImageResource(eu.leps.eIDASbrowser.R.drawable.noface);
 
             // Ajustamos el tipo de letra del título y de toda la tabla
             Typeface typeFace = Typeface.createFromAsset(myContext.getAssets(), "fonts/HelveticaNeue.ttf");
-            TableLayout miTabla = (TableLayout) findViewById(R.id.data_table);
+            TableLayout miTabla = (TableLayout) findViewById(eu.leps.eIDASbrowser.R.id.data_table);
             for(int i = 0, j = miTabla.getChildCount(); i < j; i++) {
                 View view = miTabla.getChildAt(i);
                 if (view instanceof TableRow) {
@@ -165,7 +163,7 @@ public class DataResult extends Activity {
                 }
             }
 
-            miTabla = (TableLayout) findViewById(R.id.data_table2);
+            miTabla = (TableLayout) findViewById(eu.leps.eIDASbrowser.R.id.data_table2);
             for(int i = 0, j = miTabla.getChildCount(); i < j; i++) {
                 View view = miTabla.getChildAt(i);
                 if (view instanceof TableRow) {
@@ -182,7 +180,7 @@ public class DataResult extends Activity {
 
         ///////////////////////////////////////////////////////////////////////////////////
         // Botón de vuelta al Activity anterior
-        Button btnNFCBack = (Button)findViewById(R.id.butVolver);
+        Button btnNFCBack = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butVolver);
         btnNFCBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -194,7 +192,7 @@ public class DataResult extends Activity {
 
         ///////////////////////////////////////////////////////////////////////////////////
         // Botón de configuración
-        Button btnConfig = (Button)findViewById(R.id.butConfigurar);
+        Button btnConfig = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butConfigurar);
         btnConfig.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Creamos el Intent correspondiente

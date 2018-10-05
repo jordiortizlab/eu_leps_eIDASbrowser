@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -84,9 +84,9 @@ public class NFCOperationsEnc extends Activity {
 	final Runnable cleanFragment = new Runnable() {
 		public void run() {
 			// Ocultamos los controles
-			findViewById(R.id.resultimg).setVisibility(ImageView.INVISIBLE);
-			findViewById(R.id.tituloresultado).setVisibility(TextView.INVISIBLE);
-			findViewById(R.id.textoresultado).setVisibility(TextView.INVISIBLE);
+			findViewById(eu.leps.eIDASbrowser.R.id.resultimg).setVisibility(ImageView.INVISIBLE);
+			findViewById(eu.leps.eIDASbrowser.R.id.tituloresultado).setVisibility(TextView.INVISIBLE);
+			findViewById(eu.leps.eIDASbrowser.R.id.textoresultado).setVisibility(TextView.INVISIBLE);
 		}
 	};
 
@@ -188,7 +188,7 @@ public class NFCOperationsEnc extends Activity {
 
 		// Quitamos la barra del título
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.nfcact2);
+		setContentView(eu.leps.eIDASbrowser.R.layout.nfcact2);
 
 		// Almacenamos el contexto de la Activity
 		myContext = NFCOperationsEnc.this;
@@ -215,14 +215,14 @@ public class NFCOperationsEnc extends Activity {
 
 		// Ajustamos tipo de letra
 		Typeface fontType = Typeface.createFromAsset(myContext.getAssets(), "fonts/HelveticaNeue.ttf");
-		TextView myText = (TextView)findViewById(R.id.textoresultado);
+		TextView myText = (TextView)findViewById(eu.leps.eIDASbrowser.R.id.textoresultado);
 		myText.setTypeface(fontType);
-		myText = (TextView)findViewById(R.id.tituloresultado);
+		myText = (TextView)findViewById(eu.leps.eIDASbrowser.R.id.tituloresultado);
 		myText.setTypeface(fontType);
 
 		///////////////////////////////////////////////////////////////////////////////////
 		// Botón de vuelta al Activity anterior
-		Button btnNFCBack = (Button) findViewById(R.id.butVolver);
+		Button btnNFCBack = (Button) findViewById(eu.leps.eIDASbrowser.R.id.butVolver);
 
 		btnNFCBack.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -235,7 +235,7 @@ public class NFCOperationsEnc extends Activity {
 
 		///////////////////////////////////////////////////////////////////////////////////
 		// Botón de configuración
-    	Button btnConfig = (Button)findViewById(R.id.butConfigurar);
+    	Button btnConfig = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butConfigurar);
     	btnConfig.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
 				//Creamos el Intent correspondiente
@@ -313,9 +313,9 @@ public class NFCOperationsEnc extends Activity {
 	}
 
 	private void HandleError(String strError) {
-		findViewById(R.id.resultimg).setVisibility(ImageView.VISIBLE);
-		findViewById(R.id.tituloresultado).setVisibility(TextView.VISIBLE);
-		TextView txt = (TextView)findViewById(R.id.textoresultado);
+		findViewById(eu.leps.eIDASbrowser.R.id.resultimg).setVisibility(ImageView.VISIBLE);
+		findViewById(eu.leps.eIDASbrowser.R.id.tituloresultado).setVisibility(TextView.VISIBLE);
+		TextView txt = (TextView)findViewById(eu.leps.eIDASbrowser.R.id.textoresultado);
 		txt.setText(strError);
 		txt.setVisibility(TextView.VISIBLE);
 	}

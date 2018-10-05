@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -47,7 +47,7 @@ public class DNIeLectura extends Activity {
 
 		// Quitamos la barra del título
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.main);
+		setContentView(eu.leps.eIDASbrowser.R.layout.main);
 
 		// Indicamos que la aplicación ha empezado bien
 		((MyAppDNIELECTURA)getApplicationContext()).setStarted(true);

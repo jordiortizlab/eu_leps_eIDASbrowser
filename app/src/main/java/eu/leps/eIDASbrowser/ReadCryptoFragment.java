@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -17,6 +17,6 @@ public class ReadCryptoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_read_crypto, container, false);
+        return inflater.inflate(eu.leps.eIDASbrowser.R.layout.fragment_read_crypto, container, false);
     }
 }

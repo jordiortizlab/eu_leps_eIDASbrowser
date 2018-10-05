@@ -1,4 +1,4 @@
-package com.fnmt.sample_dnie_app;
+package eu.leps.eIDASbrowser;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -93,11 +93,11 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
         {
             textoResultPage ="";
             textoResultPage ="";
-            ((TextView)findViewById(R.id.result1)).setText(R.string.op_reinit);
-            findViewById(R.id.result1).setVisibility(TextView.VISIBLE);
-            ((ImageView)findViewById(R.id.resultimg)).setImageResource(R.drawable.boton_aproxdnie);
-            findViewById(R.id.resultimg).setVisibility(ImageView.VISIBLE);
-            findViewById(R.id.resultinfo).setVisibility(TextView.INVISIBLE);
+            ((TextView)findViewById(eu.leps.eIDASbrowser.R.id.result1)).setText(eu.leps.eIDASbrowser.R.string.op_reinit);
+            findViewById(eu.leps.eIDASbrowser.R.id.result1).setVisibility(TextView.VISIBLE);
+            ((ImageView)findViewById(eu.leps.eIDASbrowser.R.id.resultimg)).setImageResource(eu.leps.eIDASbrowser.R.drawable.boton_aproxdnie);
+            findViewById(eu.leps.eIDASbrowser.R.id.resultimg).setVisibility(ImageView.VISIBLE);
+            findViewById(eu.leps.eIDASbrowser.R.id.resultinfo).setVisibility(TextView.INVISIBLE);
         }
     };
 
@@ -107,11 +107,11 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
         {
             textoResultPage ="";
             textoResultPage ="";
-            ((TextView)findViewById(R.id.result1)).setText(R.string.process_msg_lectura);
-            findViewById(R.id.result1).setVisibility(TextView.VISIBLE);
-            ((ImageView)findViewById(R.id.resultimg)).setImageResource(R.drawable.boton_aproxdnie);
-            findViewById(R.id.resultimg).setVisibility(ImageView.VISIBLE);
-            findViewById(R.id.resultinfo).setVisibility(TextView.INVISIBLE);
+            ((TextView)findViewById(eu.leps.eIDASbrowser.R.id.result1)).setText(eu.leps.eIDASbrowser.R.string.process_msg_lectura);
+            findViewById(eu.leps.eIDASbrowser.R.id.result1).setVisibility(TextView.VISIBLE);
+            ((ImageView)findViewById(eu.leps.eIDASbrowser.R.id.resultimg)).setImageResource(eu.leps.eIDASbrowser.R.drawable.boton_aproxdnie);
+            findViewById(eu.leps.eIDASbrowser.R.id.resultimg).setVisibility(ImageView.VISIBLE);
+            findViewById(eu.leps.eIDASbrowser.R.id.resultinfo).setVisibility(TextView.INVISIBLE);
         }
     };
 
@@ -142,9 +142,9 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
             // Lanzamos el diálogo con el progreso
             progressBar.setIndeterminate(true);
             progressBar.setCancelable(false);
-            progressBar.setTitle(R.string.process_title);
-            progressBar.setMessage(getApplicationContext().getString(R.string.process_msg_dni));
-            textoProcessDlg=getApplicationContext().getString(R.string.process_msg_dni);
+            progressBar.setTitle(eu.leps.eIDASbrowser.R.string.process_title);
+            progressBar.setMessage(getApplicationContext().getString(eu.leps.eIDASbrowser.R.string.process_msg_dni));
+            textoProcessDlg=getApplicationContext().getString(eu.leps.eIDASbrowser.R.string.process_msg_dni);
         }
 
         @Override
@@ -243,7 +243,7 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
 
         // Quitamos la barra del título
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.nfcactkitkat);
+        setContentView(eu.leps.eIDASbrowser.R.layout.nfcactkitkat);
 
         // Inicializamos controles
         tagFromIntent 	= null;
@@ -266,7 +266,7 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
         progressBar = new ProgressDialog(myContext);
 
         // Limpiamos controles
-        findViewById(R.id.resultinfo).setVisibility(TextView.INVISIBLE);
+        findViewById(eu.leps.eIDASbrowser.R.id.resultinfo).setVisibility(TextView.INVISIBLE);
 
         // Conexión con el DNIe
         cansDO 	= new CANSpecDOStore(this);
@@ -274,16 +274,16 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
 
         // Ajustamos tipo de letra
         fontType = Typeface.createFromAsset(myContext.getAssets(), "fonts/HelveticaNeue.ttf");
-        TextView myText = (TextView)findViewById(R.id.result1);
+        TextView myText = (TextView)findViewById(eu.leps.eIDASbrowser.R.id.result1);
         myText.setTypeface(fontType);
 
-        myText = (TextView) findViewById(R.id.resultinfo);
+        myText = (TextView) findViewById(eu.leps.eIDASbrowser.R.id.resultinfo);
         myText.setVisibility(TextView.INVISIBLE);
         myText.setTypeface(fontType);
 
 		///////////////////////////////////////////////////////////////////////////////////
 		// Botón de vuelta al Activity anterior
-    	Button btnNFCBack = (Button)findViewById(R.id.butVolver);
+    	Button btnNFCBack = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butVolver);
     	btnNFCBack.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 
@@ -294,7 +294,7 @@ public class NFCOperationsEncKitKat extends Activity implements ReaderCallback
 
 		///////////////////////////////////////////////////////////////////////////////////
 		// Botón de configuración
-    	Button btnConfig = (Button)findViewById(R.id.butConfigurar);
+    	Button btnConfig = (Button)findViewById(eu.leps.eIDASbrowser.R.id.butConfigurar);
     	btnConfig.setOnClickListener(new OnClickListener() {
     		public void onClick(View v) {
 				//Creamos el Intent correspondiente
