@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <!-- ListRow Left sied Thumbnail image -->
+    <ImageView
+        android:id="@+id/row_icon"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:src="@drawable/logo_dnie_a"
+        android:contentDescription="@string/str_img_menu"
+        android:layout_above="@+id/row_nif"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/Btn_DESTROYENTRY"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+       	android:background="@drawable/destroyentry"
+        android:layout_marginRight="5dip"
+        android:focusable="false"
+        android:layout_alignParentEnd="true" />
+    
+	<TextView
+        android:id="@+id/row_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/row_icon"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:text="@string/str_img_menu"
+		android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/row_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/row_title"
+        android:layout_below="@+id/row_title"
+        android:text="@string/str_p12_nombre"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/row_nif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row_name"
+        android:layout_alignLeft="@+id/row_name"
+        android:text="@string/op_titular_nif"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+</RelativeLayout>

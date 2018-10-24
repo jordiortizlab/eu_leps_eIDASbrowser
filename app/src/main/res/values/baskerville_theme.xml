@@ -1,0 +1,20 @@
+<?xml version= "1.0" encoding ="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Theme.Baskerville" parent="@android:style/Theme.Holo">
+        <item name="android:actionBarStyle">@style/Widget.Baskerville.ActionBar.Solid</item>
+        <item name="android:alertDialogTheme">@style/Theme_Baskerville_Dialog_Alert</item>
+    </style>
+
+    <style name="Theme_Baskerville_Dialog_Alert" parent="@style/Theme_Holo_Dialog_Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@style/DialogWindowTitle.Baskerville</item>
+        <!-- <item name="android:background"></item>-->
+        <item name="android:textColorPrimary">@android:color/holo_orange_light</item>
+        <item name="android:textColorAlertDialogListItem">@android:color/holo_orange_light</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearance.Baskerville.Medium</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearance.Baskerville.DialogWindowTitle</item>
+    </style>
+
+</resources>

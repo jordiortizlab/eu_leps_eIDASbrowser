@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="EltaServicesNames">
+        <item name="Elta2Service">Home</item>
+        <item name="Elta1Service">Parcel Delivery Voucher</item>
+        <item name="Elta3Service">ZIP-Codes</item>
+    </string-array>
+
+    <string-array name="EltaServices">
+        <item name="Elta2Service">http://www.elta.gr/en-us/home.aspx</item>
+        <item name="Elta1Service">https://eltab2b.gr/en/parcel-delivery-voucher</item>
+        <item name="Elta3Service">https://eltab2b.gr/en/zip-codes</item>
+    </string-array>
+
+    <string-array name="AthexServicesNames">
+        <item name="Athex1Service">Axia Web</item>
+        <item name="Athex2Service">Athex Sign</item>
+    </string-array>
+    <string-array name="AthexServices">
+        <item name="Athex1Service">https://www.axiaweb.gr/AXIAWeb/gr/login.htm</item>
+        <item name="Athex2Service">https://athex-sign.athexgroup.gr/</item>
+    </string-array>
+
+    <string-array name="CorreosServicesNames">
+        <item name="Correos1Service">e-Correos</item>
+    </string-array>
+    <string-array name="CorreosServices">
+        <item name="Correos1Service">https://miidentidadpre2.azurewebsites.net/</item>
+    </string-array>
+
+</resources>

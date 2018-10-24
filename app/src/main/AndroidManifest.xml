@@ -1,28 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.fnmt.sample_dnie_app">
+    package="eu.leps.eIDASbrowser">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NFC" />
 
     <uses-feature
         android:name="android.hardware.nfc"
-        android:required="true"/>
+        android:required="true" />
 
     <application
+        android:name="eu.leps.eIDASbrowser.MyAppDNIELECTURA"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/leps_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round">
-
+        android:roundIcon="@mipmap/leps_launcher_round">
         <activity
-            android:name=".SampleActivity_2"
+            android:name="eu.leps.eIDASbrowser.SampleActivity_2"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name="eu.leps.eIDASbrowser.DNIeCanSelection"
+            android:label="@string/app_title_CAN"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="eu.leps.eIDASbrowser.NFCOperationsEncKitKat"
+            android:label="@string/app_title_nfc"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="eu.leps.eIDASbrowser.DataResult"
+            android:label="@string/app_title_nfc"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="eu.leps.eIDASbrowser.ReadCrypto"
+            android:label="@string/title_activity_read_crypto"
+            android:parentActivityName="eu.leps.eIDASbrowser.SampleActivity_2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="eu.leps.eIDASbrowser.SampleActivity_2" />
+        </activity>
     </application>
+
 </manifest>

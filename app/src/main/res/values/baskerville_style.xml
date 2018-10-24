@@ -1,0 +1,76 @@
+<?xml version= "1.0" encoding ="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Widget.Baskerville.ActionBar.Solid" parent="@android:style/Widget.Holo.ActionBar.Solid">
+        <item name="android:background">#FFA500</item>
+    </style>
+
+    <style name="DialogWindowTitle.Sphinx" parent="@style/DialogWindowTitle_Holo">
+        <item name="android:textAppearance">@style/TextAppearance.Baskerville.DialogWindowTitle</item>
+    </style>
+
+    <style name="TextAppearance.Baskerville.DialogButton" parent="@android:style/TextAppearance.Holo.Medium"></style>
+
+    <style name="Baskerville.ButtonBar.AlertDialog" parent="@android:style/Holo.ButtonBar.AlertDialog">
+        <item name="android:background">@android:color/holo_purple</item>
+    </style>
+
+    <style name="AlertDialog_Baskerville">
+        <item name="android:fullDark">@android:color/black</item>
+        <item name="android:topDark">@android:color/holo_red_dark</item>
+        <item name="android:centerDark">@android:color/black</item>
+        <item name="android:bottomDark">@android:color/black</item>
+        <item name="android:fullBright">@android:color/black</item>
+        <item name="android:topBright">@android:color/black</item>
+        <item name="android:centerBright">@android:color/black</item>
+        <item name="android:bottomBright">@android:color/black</item>
+        <item name="android:bottomMedium">@android:color/black</item>
+        <item name="android:centerMedium">@android:color/black</item>
+    </style>
+
+    <!-- Local copy of android:Theme.Holo.Dialog.Alert -->
+    <style name="Theme_Holo_Dialog_Alert" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowTitleStyle">@style/DialogWindowTitle_Holo</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+    </style>
+
+    <!-- Local copy of android:DialogWindowTitle.Holo -->
+    <style name="DialogWindowTitle_Holo">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Holo.DialogWindowTitle</item>
+    </style>
+
+    <style name="DialogWindowTitle.Baskerville" parent="@style/DialogWindowTitle_Holo">
+        <item name="android:textAppearance">@style/TextAppearance.Baskerville.DialogWindowTitle</item>
+    </style>
+
+    <style name="TextAppearance.Baskerville.DialogWindowTitle" parent="@android:style/TextAppearance.Holo.DialogWindowTitle">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Baskerville.Large" parent="@android:style/TextAppearance.Holo.Large">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextAppearance.Baskerville.Medium" parent="@android:style/TextAppearance.Holo.Medium">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.Baskerville.Small" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Baskerville.Smaller" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

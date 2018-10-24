@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.fnmt.sample_dnie_app"
+        applicationId 'eu.leps.eIDASbrowser'
         minSdkVersion 22
         targetSdkVersion 26
         versionCode 1
@@ -15,10 +15,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
     implementation 'org.bouncycastle:bcprov-jdk15on:1.49'
     implementation 'org.jsoup:jsoup:1.10.3'
     implementation project(':dniedroid-release')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
