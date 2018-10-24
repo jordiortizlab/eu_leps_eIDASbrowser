@@ -19,8 +19,9 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:src="@drawable/leps_ec_banner" />
+            android:layout_height="@android:dimen/notification_large_icon_height"
+            android:background="@drawable/leps_ec_banner_small"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/result_info"
@@ -121,8 +122,8 @@
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:src="@drawable/leps_ec_banner" />
+            android:layout_height="@android:dimen/notification_large_icon_width"
+            android:background="@drawable/leps_ec_banner_small" />
 
         <LinearLayout
             android:id="@+id/fragment_container"
